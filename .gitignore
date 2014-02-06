@@ -1,0 +1,29 @@
+.DS_Store
+Thumbs.db
+
+# Composer
+composer.phar
+composer.lock
+
+# Sass
+.sass-cache
+node_modules
+
+# Node
+/node_modules
+/npm-debug.log
+
+# Laravel
+/bootstrap/compiled.php
+/vendor
+/app/config/local
+
+# Hide var files
+/public/_*
+/public/var/*
+
+# Project
+/report/
+
+# Bower
+/public/components

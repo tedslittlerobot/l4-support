@@ -1,0 +1,20 @@
+{
+    "name": "tlr/l4-support",
+    "description": "",
+    "authors": [
+        {
+            "name": "Stef Horner",
+            "email": "stef@tedslittlerobot.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tlr\\Support\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
