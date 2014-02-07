@@ -16,5 +16,8 @@
             "Tlr\\Support\\": "src/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require-dev": {
+        "mockery/mockery": "dev-master"
+    }
 }
