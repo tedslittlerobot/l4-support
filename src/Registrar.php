@@ -157,6 +157,22 @@ class Repository {
 	}
 
 	/**
+	 * Assign the $keys the $model, if they are present
+	 * @param  array|string $keys
+	 * @param  string $property
+	 */
+	protected function assignIfExists( $keys, $property = 'model' )
+	{
+		foreach ( (array)$keys as $key)
+		{
+			if ( ! is_null( $this->data($key) ) )
+			{
+				$this->$property->$key = $this->data($key);
+			}
+		}
+	}
+
+	/**
 	 * Save the models to the database
 	 */
 	protected function save()
