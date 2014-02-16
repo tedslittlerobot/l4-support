@@ -5,18 +5,43 @@ use Illuminate\Support\ServiceProvider;
 class SupportServiceProvider extends ServiceProvider {
 
 	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
-
-	/**
-	 * Kick off the router using events
-	 * @return [type] [description]
+	 * Boot this module
 	 */
 	public function boot()
 	{
+		$this->htmlMacros();
+	}
+
+	/**
+	 * Register some HTML macros
+	 */
+	public function htmlMacros()
+	{
+		/**
+		 * Element
+		 *
+		 * Constructs an element from scratch, with the given element (defaults to div), and attributes
+		 *
+		 * If content is provided, it will be inserted, and a matching closing tag generated
+		 *
+		 * @var string
+		 */
+		$this->app['html']->macro('element', function ( $element = 'div', $attributes = array(), $content = null )
+		{
+			foreach ($attributes as $attribute => $values)
+			{
+				$attributes[$attribute] = implode(' ', (array)$values);
+			}
+
+			$html = "<{$element}" . $this->app['html']->attributes( $attributes ) . ">";
+
+			if ( ! is_null($content) )
+			{
+				$html .= "{$content}</{$element}>";
+			}
+
+			return $html;
+		});
 	}
 
 	/**
@@ -25,15 +50,5 @@ class SupportServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function register() {}
-
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return array();
-	}
 
 }
