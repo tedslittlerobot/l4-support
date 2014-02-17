@@ -5,8 +5,9 @@ if ( ! function_exists('dot_get'))
 	/**
 	 * Get a property out of mixed objects and arrays by dot notation
 	 *
-	 * @param  string  $name
-	 * @param  array   $parameters
+	 * @param  mixed    $item
+	 * @param  string   $key
+	 * @param  mixed    $default
 	 * @return string
 	 */
 	function dot_get($item, $key, $default = null)
@@ -23,7 +24,7 @@ if ( ! function_exists('dot_get'))
 			$item = is_object($item) ? $item->{$segment} : $item[$segment];
 		}
 
-		return $item ?: $default;
+		return $item ?: value($default);
 	}
 }
 
