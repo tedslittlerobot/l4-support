@@ -14,7 +14,8 @@
     "autoload": {
         "psr-4": {
             "Tlr\\Support\\": "src/"
-        }
+        },
+        "files": ["src/functions.php"]
     },
     "minimum-stability": "stable",
     "require-dev": {
