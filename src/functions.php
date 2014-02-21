@@ -5,30 +5,30 @@ if ( ! function_exists('dot_get'))
 	/**
 	 * Get a property out of mixed objects and arrays by dot notation
 	 *
-	 * @param  mixed    $item
+	 * @param  mixed    $haystack
 	 * @param  string   $key
 	 * @param  mixed    $default
 	 * @return string
 	 */
-	function dot_get($item, $key, $default = null)
+	function dot_get($haystack, $key, $default = null)
 	{
-		if (is_null($key)) return $item;
+		if (is_null($key)) return $haystack;
 
-		foreach ($explode('.', $key) as $segment)
+		foreach (explode('.', $key) as $segment)
 		{
-			if ( ! (is_object($item) || is_array($item) ) )
+			if ( ! (is_object($haystack) || is_array($haystack) ) )
 			{
 				return value($default);
 			}
 
-			$item = is_object($item) ? $item->{$segment} : $item[$segment];
+			$haystack = is_object($haystack) ? $haystack->{$segment} : $haystack[$segment];
 		}
 
-		return $item ?: value($default);
+		return $haystack ?: value($default);
 	}
 }
 
-if ( ! function_exists('array_find'))
+if ( ! function_exists('array_find_dot'))
 {
 	/**
 	 * Find an item of an array by a dot notation accessible property
@@ -39,11 +39,11 @@ if ( ! function_exists('array_find'))
 	 * @param  mixed   $default
 	 * @return string
 	 */
-	function array_find( $needle, array $haystack, $key, $default = null )
+	function array_find_dot( $needle, array $haystack, $location, $default = null )
 	{
 		foreach ($haystack as $key => $value)
 		{
-			if ( dot_get( $value ) === $key )
+			if ( dot_get( $value, $location ) === $needle )
 			{
 				return $value;
 			}
