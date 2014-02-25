@@ -3,7 +3,14 @@
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Support\Facades\Validator;
 
+use Tlr\Support\Database\Orderer;
+
 class Repository {
+
+	public function __construct( Orderer $orderer = null)
+	{
+		$this->orderer = $orderer;
+	}
 
 	/**
 	 * An Eloquent model
@@ -189,6 +196,25 @@ class Repository {
 	public function getErrors()
 	{
 		return $this->val->getMessageBag();
+	}
+
+	/**
+	 * Insert an item into a collection
+	 * @param  Collection $list
+	 */
+	protected function insert( $list, $base = 1 )
+	{
+		foreach( $this->orderer->insert( $this->model, $list->all(), $this->model->index ) as $model )
+		{
+			$model->index = $base++;
+
+			if ($model->isDirty('index'))
+			{
+				$model->save();
+			}
+		}
+
+		return $this;
 	}
 
 }
