@@ -200,11 +200,11 @@ class Repository {
 
 	/**
 	 * Insert an item into a collection
-	 * @param  Collection $list
+	 * @param  array $list
 	 */
-	protected function insert( $list, $base = 1 )
+	protected function insert( array $list, $base = 1 )
 	{
-		foreach( $this->orderer->insert( $this->model, $list->all(), $this->model->index ) as $model )
+		foreach( $this->orderer->insert( $this->model, $list, $this->model->index ) as $model )
 		{
 			$model->index = $base++;
 
