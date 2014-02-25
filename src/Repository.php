@@ -217,4 +217,25 @@ class Repository {
 		return $this;
 	}
 
+	/**
+	 * Move an item to a new index
+	 * @param  array    $list
+	 * @param  integer  $index
+	 * @param  integer  $base
+	 */
+	protected function move( array $list, $index, $base = 1 )
+	{
+		foreach( $this->orderer->move( $this->model->index, $list, $index ) as $model )
+		{
+			$model->index = $base++;
+
+			if ($model->isDirty('index'))
+			{
+				$model->save();
+			}
+		}
+
+		return $this;
+	}
+
 }
