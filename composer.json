@@ -19,6 +19,7 @@
     },
     "minimum-stability": "stable",
     "require-dev": {
-        "mockery/mockery": "dev-master"
+        "mockery/mockery": "dev-master",
+        "patchwork/utf8": "1.1.*"
     }
 }
