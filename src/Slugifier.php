@@ -38,15 +38,24 @@ class Slugifier {
 	 */
 	public function getIncrementor($incrementor)
 	{
-		if (is_callable($incrementor))
+		if ( ! is_null($incrementor) )
 		{
 			return $incrementor;
 		}
 
-		return function($string, $iteration)
-		{
-			return "{$string}-{$iteration}";
-		};
+		return array($this, 'numericIncrementor');
+	}
+
+	/**
+	 * The default iterator
+	 * @param  string  $string
+	 * @param  integer $iteration
+	 * @return string
+	 */
+	public function numericIncrementor($string, $iteration)
+	{
+		$string = Str::slug( $string );
+		return "{$string}-{$iteration}";
 	}
 
 	/**
