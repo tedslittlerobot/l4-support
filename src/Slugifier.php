@@ -1,4 +1,4 @@
-<?php
+<?php namespace Tlr\Support;
 
 use Illuminate\Support\Str;
 
