@@ -26,9 +26,12 @@ class Slugifier {
 
 			if (call_user_func($comparator, $newStr))
 			{
-				return $newStr;
+				$string = $newStr;
+				break;
 			}
 		}
+
+		return $string;
 	}
 
 	/**
