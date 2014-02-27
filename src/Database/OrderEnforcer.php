@@ -13,7 +13,7 @@ class OrderEnforcer {
 	 * Enforce a strict incremental order, starting at the given index
 	 * @param  Collection $list
 	 */
-	public function enforce( Collection $list, $base = 1 )
+	public function enforce( $list, $base = 1, $key = 'index' )
 	{
 		// we minus one because we're incrememting at the start of the loop
 		$xi = $base - 1;
@@ -55,7 +55,7 @@ class OrderEnforcer {
 	 * @param  closure $subquery     an optional callback that will be passed the query object to constrict it
 	 * @return Collection
 	 */
-	public function enforceRelationship( Model $parent, $relationship, $key = 'order', $base = 1, $subquery = null )
+	public function enforceRelationship( Model $parent, $relationship, $key = 'index', $base = 1, $subquery = null )
 	{
 		$query = $parent->{$relationship}()->orderBy('key');
 
@@ -66,6 +66,6 @@ class OrderEnforcer {
 
 		$items = $query->get();
 
-		return $this->enforce( $items, $base );
+		return $this->enforce( $items, $base, $key );
 	}
 }
