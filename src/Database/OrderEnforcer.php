@@ -55,7 +55,7 @@ class OrderEnforcer {
 	 */
 	public function enforceRelationship( Model $parent, $relationship, $key = 'index', $base = 1, $subquery = null )
 	{
-		$query = $parent->{$relationship}()->orderBy('key');
+		$query = $parent->{$relationship}()->orderBy($key);
 
 		if ( is_callable($subquery) )
 		{
