@@ -15,7 +15,7 @@ class OrdererTest extends \PHPUnit_Framework_TestCase {
 			'a', 'd', 'c',
 		);
 
-		$sorted = $this->orderer->insert( 'c', $array, 2 );
+		$sorted = $this->orderer->insert( $array, 'c', 2 );
 
 		$this->assertEquals( array('a', 'c', 'd', 'c'), $sorted );
 	}
@@ -26,7 +26,7 @@ class OrdererTest extends \PHPUnit_Framework_TestCase {
 			'a', 'c', 'd', 'e', 'b', 'f'
 		);
 
-		$sorted = $this->orderer->move( 5, $array, 2 );
+		$sorted = $this->orderer->move( $array, 5, 2 );
 
 		$this->assertSame( array('a', 'b', 'c', 'd', 'e', 'f'), $sorted );
 	}
@@ -37,7 +37,7 @@ class OrdererTest extends \PHPUnit_Framework_TestCase {
 			'a', 'e', 'b', 'c', 'd', 'f'
 		);
 
-		$sorted = $this->orderer->move( 2, $array, 5 );
+		$sorted = $this->orderer->move( $array, 2, 5 );
 
 		$this->assertSame( array('a', 'b', 'c', 'd', 'e', 'f'), $sorted );
 	}
@@ -48,7 +48,7 @@ class OrdererTest extends \PHPUnit_Framework_TestCase {
 			'a', 'c', 'd', 'e', 'b', 'f'
 		);
 
-		$sorted = $this->orderer->moveItem( 'b', $array, 2 );
+		$sorted = $this->orderer->moveItem( $array, 'b', 2 );
 
 		$this->assertSame( array('a', 'b', 'c', 'd', 'e', 'f'), $sorted );
 	}

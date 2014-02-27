@@ -73,7 +73,7 @@ class Orderer {
 	 * @param  integer   $index  the order index
 	 * @return array
 	 */
-	public function insert( $new, array $list, $index )
+	public function insert( array $list, $new, $index )
 	{
 		array_splice( $list, $this->index($index), 0, [$new] );
 
@@ -87,11 +87,11 @@ class Orderer {
 	 * @param  integer   $targetIndex the order index to move to
 	 * @return array
 	 */
-	public function move( $index, $list, $targetIndex )
+	public function move( $list, $index, $targetIndex )
 	{
 		list($item) = array_splice( $list, $this->index($index), 1 );
 
-		return $this->insert( $item, $list, $targetIndex );
+		return $this->insert( $list, $item, $targetIndex );
 	}
 
 	/**
@@ -101,10 +101,10 @@ class Orderer {
 	 * @param  integer   $targetIndex
 	 * @return array
 	 */
-	public function moveItem( $item, $list, $targetIndex )
+	public function moveItem( $list, $item, $targetIndex )
 	{
 		$index = array_search( $item, $list );
-		return $this->move( $this->order($index), $list, $targetIndex );
+		return $this->move( $list, $this->order($index), $targetIndex );
 	}
 
 }
