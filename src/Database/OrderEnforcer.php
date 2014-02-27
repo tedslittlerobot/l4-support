@@ -11,19 +11,17 @@ class OrderEnforcer {
 	}
 	/**
 	 * Enforce a strict incremental order, starting at the given index
-	 * @param  Collection $list
+	 * @param  array $list
 	 */
 	public function enforce( $list, $base = 1, $key = 'index' )
 	{
-		// we minus one because we're incrememting at the start of the loop
-		$xi = $base - 1;
-
-		foreach ($list as $item)
+		foreach ($list as $model)
 		{
-			if ( $item->order !== ++$xi )
+			$model->$key = $base++;
+
+			if ($model->isDirty( $key ))
 			{
-				$item->order = $xi;
-				$item->save();
+				$model->save();
 			}
 		}
 
