@@ -30,23 +30,23 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase {
 
 	public function testIncrementalSlug()
 	{
-		$input = 'woop';
+		$input = 'Woop Woop';
 		$xi = 0;
 		$comparator = function($string) use (&$xi)
 		{
 			$xi++;
-			return $string === 'woop-4';
+			return $string === 'woop-woop-4';
 		};
 
 		$result = $this->slugifier->incrementalSlug($input, $comparator);
 
-		$this->assertEquals('woop-4', $result);
+		$this->assertEquals('woop-woop-4', $result);
 		$this->assertEquals(5, $xi);
 	}
 
 	public function testDefaultIncrementalSlug()
 	{
-		$input = 'woop';
+		$input = 'Woop Woop';
 		$xi = 0;
 		$comparator = function($string) use (&$xi)
 		{
@@ -56,7 +56,7 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $this->slugifier->incrementalSlug($input, $comparator);
 
-		$this->assertEquals('woop', $result);
+		$this->assertEquals('woop-woop', $result);
 		$this->assertEquals(1, $xi);
 	}
 }
