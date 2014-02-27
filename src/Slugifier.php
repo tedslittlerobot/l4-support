@@ -13,6 +13,8 @@ class Slugifier {
 	 */
 	public function incrementalSlug($string, $comparator, $incrementor = null)
 	{
+		$string = Str::slug($string);
+
 		$incrementor = $this->getIncrementor($incrementor);
 
 		if ( call_user_func($comparator, $string) )
@@ -21,7 +23,8 @@ class Slugifier {
 		}
 
 		$xi = 1;
-		while ( true ) {
+		while ( true )
+		{
 			$newStr = call_user_func( $incrementor, $string, $xi++ );
 
 			if (call_user_func($comparator, $newStr))
@@ -57,7 +60,6 @@ class Slugifier {
 	 */
 	public function numericIncrementor($string, $iteration)
 	{
-		$string = Str::slug( $string );
 		return "{$string}-{$iteration}";
 	}
 
