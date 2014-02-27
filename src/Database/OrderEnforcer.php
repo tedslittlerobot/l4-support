@@ -31,6 +31,23 @@ class OrderEnforcer {
 	}
 
 	/**
+	 * Insert an item into a list
+	 * @param  array $list
+	 */
+	public function insert( $list, $base = 1, $key = 'index' )
+	{
+		return $this->enforce( $this->orderer->insert( $list, $this->model, $this->model->index ), $base, $key );
+	}
+
+	/**
+	 * Move an item around an array
+	 */
+	public function move( $list, $fromIndex, $toIndex, $base = 1, $key = 'index' )
+	{
+		return $this->enforce( $this->orderer->move( $list, $fromIndex, $toIndex ), $base, $index );
+	}
+
+	/**
 	 * Enforce a relationship order
 	 * @param  Model   $parent       the parent model
 	 * @param  string  $relationship the relationship name
