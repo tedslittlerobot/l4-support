@@ -1,10 +1,14 @@
 <?php namespace Tlr\Support\Database;
 
-use Illuminate\Database\Eloquent\Collection;
+// use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderEnforcer {
 
+	public function __construct( Orderer $orderer )
+	{
+		$this->orderer = $orderer;
+	}
 	/**
 	 * Enforce a strict incremental order, starting at the given index
 	 * @param  Collection $list
