@@ -7,11 +7,6 @@ use Tlr\Support\Database\Orderer;
 
 class Repository {
 
-	public function __construct( Orderer $orderer = null)
-	{
-		$this->orderer = $orderer;
-	}
-
 	/**
 	 * An Eloquent model
 	 * @var Illuminate\Database\Eloquent\Model
