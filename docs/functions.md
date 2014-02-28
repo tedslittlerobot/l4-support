@@ -36,3 +36,12 @@ Find the first item in the given array where the `$key => $needle` (when evaluat
 > @TODO add an example
 
 
+## array_splice_item
+
+```php
+array_splice_item(&$haystack, $item, $default = null);
+```
+
+Splice the given item from the given array. Essentially a macro for array_splice on the result of array_search.
+
+> @TODO add an example
