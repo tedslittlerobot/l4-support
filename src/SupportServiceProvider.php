@@ -1,6 +1,7 @@
 <?php namespace Tlr\Support;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class SupportServiceProvider extends ServiceProvider {
 
@@ -10,6 +11,7 @@ class SupportServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->htmlMacros();
+		$this->validations();
 	}
 
 	/**
@@ -41,6 +43,24 @@ class SupportServiceProvider extends ServiceProvider {
 			}
 
 			return $html;
+		});
+	}
+
+	/**
+	 * Add some validations
+	 * @todo move somewhere more sensible
+	 */
+	public function validations()
+	{
+		$this->app['validator']->extend('slug', function($attribute, $value, $parameters)
+		{
+			return $value == Str::slug($value);
+		});
+
+		$this->app['validator']->extend('json', function($attribute, $value, $parameters)
+		{
+			json_decode($value);
+			return (json_last_error() == JSON_ERROR_NONE);
 		});
 	}
 
