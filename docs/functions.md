@@ -25,4 +25,14 @@ ie. an array, with a key `one`, pointing to an object, with a key, `two`, with t
 dot_get($array, 'one.two'); // outputs   string(5) "three"
 ```
 
+## array_find_dot
+
+```php
+array_find_dot($needle, $haystack, $key, $default = null, $returnItem = true);
+```
+
+Find the first item in the given array where the `$key => $needle` (when evaluated using `dot_get`, as described above) is true.
+
+> @TODO add an example
+
 
