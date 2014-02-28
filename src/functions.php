@@ -39,13 +39,13 @@ if ( ! function_exists('array_find_dot'))
 	 * @param  mixed   $default
 	 * @return string
 	 */
-	function array_find_dot( $needle, array $haystack, $location, $default = null )
+	function array_find_dot( $needle, array $haystack, $location, $default = null, $returnItem = true )
 	{
 		foreach ($haystack as $key => $value)
 		{
-			if ( dot_get( $value, $location ) === $needle )
+			if ( dot_get( $value, $location ) == $needle )
 			{
-				return $value;
+				return $returnItem ? $value : $key;
 			}
 		}
 
