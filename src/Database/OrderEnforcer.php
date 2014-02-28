@@ -32,9 +32,9 @@ class OrderEnforcer {
 	 * Insert an item into a list
 	 * @param  array $list
 	 */
-	public function insert( $list, $base = 1, $key = 'index' )
+	public function insert( $list, $item, $base = 1, $key = 'index' )
 	{
-		return $this->enforce( $this->orderer->insert( $list, $this->model, $this->model->index ), $base, $key );
+		return $this->enforce( $this->orderer->insert( $list, $item, $item->{$key} ), $base, $key );
 	}
 
 	/**
