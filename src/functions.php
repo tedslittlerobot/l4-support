@@ -52,3 +52,25 @@ if ( ! function_exists('array_find_dot'))
 		return $default;
 	}
 }
+
+if ( ! function_exists('array_splice_item'))
+{
+	/**
+	 * Find an item of an array by a dot notation accessible property
+	 *
+	 * @param  string  $needle
+	 * @param  array   $haystack
+	 * @param  string  $key
+	 * @param  mixed   $default
+	 * @return string
+	 */
+	function array_splice_item( array &$haystack, $item, $default = null )
+	{
+		if ( ($key = array_search($item, $haystack)) === false)
+		{
+			return null;
+		}
+
+		return array_splice($haystack, $key, 1)[0];
+	}
+}
