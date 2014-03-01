@@ -39,7 +39,7 @@ If you have an array of models, for example, you can find one specifically by, s
 array_find_dot( 'page-four', $pages, 'slug' ); // will return the page with a slug of 'page-four'
 ```
 
-Or, if you had a pre-fetched relationship, you can use laravel's
+As mentioned above, this uses `dot_get` to match the items, so this can be used on multi-dimentional object and array combinations.
 
 
 ## array_splice_item
