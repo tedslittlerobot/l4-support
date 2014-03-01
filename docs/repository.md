@@ -1,5 +1,12 @@
 Repository
 ==========
+
+> An abstract class used to abstract database logic from controllers
+
+I would recommend adding the following to your `aliases` array in `config/app.php`
+
+Let's say we're saving a User model. Firstly, i'll outline a few methods that can be used when subclassing, then I'll do an example.
+
 # Methods
 
 ## validate()
