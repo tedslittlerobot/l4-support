@@ -9,4 +9,4 @@ L4 Support
 - __[Validation Rules](docs/validation.md)__
 - __[Orderer](docs/orderer.md)__
 - __[Order Enforcer](docs/order-enforcer.md)__
-- _[Slugifier](docs/slugifier.md) (documentation not yet finished)_
+- __[Slugifier](docs/slugifier.md)__
