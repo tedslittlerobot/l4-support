@@ -33,7 +33,13 @@ array_find_dot($needle, $haystack, $key, $default = null, $returnItem = true);
 
 Find the first item in the given array where the `$key => $needle` (when evaluated using `dot_get`, as described above) is true.
 
-> @TODO add an example
+If you have an array of models, for example, you can find one specifically by, say, slug:
+
+```php
+array_find_dot( 'page-four', $pages, 'slug' ); // will return the page with a slug of 'page-four'
+```
+
+Or, if you had a pre-fetched relationship, you can use laravel's
 
 
 ## array_splice_item
