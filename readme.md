@@ -7,7 +7,6 @@ L4 Support
 - __[Functions](docs/functions.md)__
 - __[Repository](docs/repository.md)__
 - __[Validation Rules](docs/validation.md)__
-
-- _[Orderer](docs/orderer.md) (documentation not yet finished)_
+- __[Orderer](docs/orderer.md)__
 - _[Order Enforcer](docs/order-enforcer.md) (documentation not yet finished)_
 - _[Slugifier](docs/slugifier.md) (documentation not yet finished)_
