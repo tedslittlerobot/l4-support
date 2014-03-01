@@ -15,7 +15,7 @@ class OrdererTest extends \PHPUnit_Framework_TestCase {
 			'a', 'd', 'c',
 		);
 
-		$sorted = $this->orderer->insert( $array, 'c', 2 );
+		$sorted = $this->orderer->insert( $array, 'c', 1 );
 
 		$this->assertEquals( array('a', 'c', 'd', 'c'), $sorted );
 	}
@@ -26,7 +26,7 @@ class OrdererTest extends \PHPUnit_Framework_TestCase {
 			'a', 'c', 'd', 'e', 'b', 'f'
 		);
 
-		$sorted = $this->orderer->move( $array, 5, 2 );
+		$sorted = $this->orderer->move( $array, 4, 1 );
 
 		$this->assertSame( array('a', 'b', 'c', 'd', 'e', 'f'), $sorted );
 	}
@@ -37,7 +37,7 @@ class OrdererTest extends \PHPUnit_Framework_TestCase {
 			'a', 'e', 'b', 'c', 'd', 'f'
 		);
 
-		$sorted = $this->orderer->move( $array, 2, 5 );
+		$sorted = $this->orderer->move( $array, 1, 4 );
 
 		$this->assertSame( array('a', 'b', 'c', 'd', 'e', 'f'), $sorted );
 	}
@@ -48,7 +48,7 @@ class OrdererTest extends \PHPUnit_Framework_TestCase {
 			'a', 'c', 'd', 'e', 'b', 'f'
 		);
 
-		$sorted = $this->orderer->moveItem( $array, 'b', 2 );
+		$sorted = $this->orderer->moveItem( $array, 'b', 1 );
 
 		$this->assertSame( array('a', 'b', 'c', 'd', 'e', 'f'), $sorted );
 	}
@@ -61,15 +61,15 @@ class OrdererTest extends \PHPUnit_Framework_TestCase {
 	public function testObjectIndexAssignment()
 	{
 		$array = array(
-			(object)[ 'order' => 69 ],
-			(object)[ 'order' => 70 ],
-			(object)[ 'order' => 71 ],
+			(object)[ 'index' => 69 ],
+			(object)[ 'index' => 70 ],
+			(object)[ 'index' => 71 ],
 		);
 
 		$target = array(
-			(object)[ 'order' => 1 ],
-			(object)[ 'order' => 2 ],
-			(object)[ 'order' => 3 ],
+			(object)[ 'index' => 0 ],
+			(object)[ 'index' => 1 ],
+			(object)[ 'index' => 2 ],
 		);
 
 		$sorted = $this->orderer->assignIndices( $array );
@@ -86,15 +86,15 @@ class OrdererTest extends \PHPUnit_Framework_TestCase {
 	public function testArrayIndexAssignment()
 	{
 		$array = array(
-			[ 'order' => 69 ],
-			[ 'order' => 70 ],
-			[ 'order' => 71 ],
+			[ 'index' => 69 ],
+			[ 'index' => 70 ],
+			[ 'index' => 71 ],
 		);
 
 		$target = array(
-			[ 'order' => 1 ],
-			[ 'order' => 2 ],
-			[ 'order' => 3 ],
+			[ 'index' => 0 ],
+			[ 'index' => 1 ],
+			[ 'index' => 2 ],
 		);
 
 		$sorted = $this->orderer->assignIndices( $array );
