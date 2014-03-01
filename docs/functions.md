@@ -48,6 +48,6 @@ As mentioned above, this uses `dot_get` to match the items, so this can be used 
 array_splice_item(&$haystack, $item, $default = null);
 ```
 
-Splice the given item from the given array. Essentially a macro for array_splice on the result of array_search.
+Splice the given item from the given array. Essentially a macro for `array_splice` on the result of `array_search`.
 
 > @TODO add an example
