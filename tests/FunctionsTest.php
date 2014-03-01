@@ -67,4 +67,24 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $bar, array_find_dot( 'drei', $array, 'one.two' ) );
 	}
 
+	public function testArraySpliceValidItem()
+	{
+		$array = array( 'one', 'two', 'three' );
+
+		$item = array_splice_item( $array, 'two' );
+
+		$this->assertEquals('two', $item);
+		$this->assertSame(['one', 'three'], $array);
+	}
+
+	public function testArraySpliceInvalidItem()
+	{
+		$array = array( 'one', 'two', 'three' );
+
+		$item = array_splice_item( $array, 'four' );
+
+		$this->assertNull( $item );
+		$this->assertSame(['one', 'two', 'three'], $array);
+	}
+
 }
