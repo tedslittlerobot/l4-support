@@ -6,7 +6,7 @@ class OrdererTest extends \PHPUnit_Framework_TestCase {
 
 	public function setUp()
 	{
-		$this->orderer = new Tlr\Support\Database\Orderer;
+		$this->orderer = new Tlr\Support\Orderer;
 	}
 
 	public function testInsert()

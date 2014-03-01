@@ -1,4 +1,4 @@
-<?php namespace Tlr\Support\Database;
+<?php namespace Tlr\Support;
 
 class Orderer {
 

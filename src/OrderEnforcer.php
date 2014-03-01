@@ -1,4 +1,4 @@
-<?php namespace Tlr\Support\Database;
+<?php namespace Tlr\Support;
 
 // use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;

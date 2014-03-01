@@ -11,11 +11,11 @@ If the index of the model has changed (it uses Eloquent's `isDirty($key)` method
 
 ## insert( $list, $item, $base = 1, $key )
 
-Will call insert on an instance of `Tlr\Support\Database\Orderer`, and passes the result to `enforce`.
+Will call insert on an instance of `Tlr\Support\Orderer`, and passes the result to `enforce`.
 
 ## move( $list, $item, $base = 1, $key )
 
-Will call move on an instance of `Tlr\Support\Database\Orderer`, and passes the result to `enforce`.
+Will call move on an instance of `Tlr\Support\Orderer`, and passes the result to `enforce`.
 
 ## enforceRelationship( Eloquent $model, $relationship, $key = 'index', $base = 1, $subquery = null )
 

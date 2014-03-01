@@ -3,8 +3,6 @@
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Support\Facades\Validator;
 
-use Tlr\Support\Database\Orderer;
-
 class Repository {
 
 	/**
