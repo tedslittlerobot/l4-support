@@ -5,7 +5,7 @@ L4 Support
 
 - __[Html Macro](docs/html.md)__
 - __[Functions](docs/functions.md)__
-- _[Repository](docs/repository.md) (documentation not yet finished)_
+- __[Repository](docs/repository.md)__
 
 - _[Orderer](docs/orderer.md) (documentation not yet finished)_
 - _[Order Enforcer](docs/order-enforcer.md) (documentation not yet finished)_
