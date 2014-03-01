@@ -163,7 +163,7 @@ class Repository {
 	 * @param  array|string $keys
 	 * @param  string $property
 	 */
-	protected function assignIfExists( $keys, $property = 'model' )
+	protected function assign( $keys, $property = 'model' )
 	{
 		foreach ( (array)$keys as $key)
 		{
