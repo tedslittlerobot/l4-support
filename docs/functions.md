@@ -3,9 +3,7 @@ Support Functions
 
 ## dot_get
 
-```php
-dot_get($haystack, $needle, $default = null);
-```
+> dot_get($haystack, $needle, $default = null);
 
 This is an extension of Illuminate's `array_get()` that allows for mixed objects and arrays.
 
@@ -27,9 +25,7 @@ dot_get($array, 'one.two'); // outputs   string(5) "three"
 
 ## array_find_dot
 
-```php
-array_find_dot($needle, $haystack, $key, $default = null, $returnItem = true);
-```
+> array_find_dot($needle, $haystack, $key, $default = null, $returnItem = true);
 
 Find the first item in the given array where the `$key => $needle` (when evaluated using `dot_get`, as described above) is true.
 
@@ -44,9 +40,7 @@ As mentioned above, this uses `dot_get` to match the items, so this can be used 
 
 ## array_splice_item
 
-```php
-array_splice_item(&$haystack, $item, $default = null);
-```
+> array_splice_item(&$haystack, $item, $default = null);
 
 Splice the given item from the given array. Essentially a macro for `array_splice` on the result of `array_search`.
 
