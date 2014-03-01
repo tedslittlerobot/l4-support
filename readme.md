@@ -4,8 +4,8 @@ L4 Support
 > Some Helper classes and functions for Laravel 4
 
 - __[Html Macro](docs/html.md)__
+- __[Functions](docs/functions.md)__
 - _[Repository](docs/repository.md) (documentation not yet finished)_
-- _[Functions](docs/functions.md) (documentation not yet finished)_
 
 - _[Orderer](docs/orderer.md) (documentation not yet finished)_
 - _[Order Enforcer](docs/order-enforcer.md) (documentation not yet finished)_
