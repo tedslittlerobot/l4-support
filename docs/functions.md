@@ -50,4 +50,10 @@ array_splice_item(&$haystack, $item, $default = null);
 
 Splice the given item from the given array. Essentially a macro for `array_splice` on the result of `array_search`.
 
-> @TODO add an example
+For example, using the array `['one', 'two', 'three']`:
+
+```php
+$item = array_splice_item($array, 'two');
+echo $item; // echoes 'two'
+echo json_encode($array); // echoes ["one", "three"]
+```
