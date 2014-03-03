@@ -62,6 +62,11 @@ class SupportServiceProvider extends ServiceProvider {
 			json_decode($value);
 			return (json_last_error() == JSON_ERROR_NONE);
 		});
+
+		$this->app['validator']->extend('false', function($attribute, $value, $parameters)
+		{
+			return false;
+		});
 	}
 
 	/**

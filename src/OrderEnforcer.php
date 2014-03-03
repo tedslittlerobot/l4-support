@@ -1,4 +1,4 @@
-<?php namespace Tlr\Support\Database;
+<?php namespace Tlr\Support;
 
 // use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -34,6 +34,7 @@ class OrderEnforcer {
 	 */
 	public function insert( $list, $item, $base = 1, $key = 'index' )
 	{
+		$this->orderer->setBase( $base );
 		return $this->enforce( $this->orderer->insert( $list, $item, $item->{$key} ), $base, $key );
 	}
 
@@ -42,6 +43,7 @@ class OrderEnforcer {
 	 */
 	public function move( $list, $fromIndex, $toIndex, $base = 1, $key = 'index' )
 	{
+		$this->orderer->setBase( $base );
 		return $this->enforce( $this->orderer->move( $list, $fromIndex, $toIndex ), $base, $index );
 	}
 

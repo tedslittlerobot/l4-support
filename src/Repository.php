@@ -3,8 +3,6 @@
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Support\Facades\Validator;
 
-use Tlr\Support\Database\Orderer;
-
 class Repository {
 
 	/**
@@ -133,6 +131,20 @@ class Repository {
 		return array_get( $this->files, $key, $default );
 	}
 
+	public function setData( $data )
+	{
+		$this->data = (array)$data;
+
+		return $this;
+	}
+
+	public function setFiles( $files )
+	{
+		$this->files = (array)$files;
+
+		return $this;
+	}
+
 	/**
 	 * Perform some validation
 	 * @return boolean
@@ -151,7 +163,7 @@ class Repository {
 	/**
 	 * Do something with all that freshly validated data
 	 */
-	protected function fill()
+	public function fill()
 	{
 		$this->model->fill( $this->data() );
 
@@ -163,7 +175,7 @@ class Repository {
 	 * @param  array|string $keys
 	 * @param  string $property
 	 */
-	protected function assignIfExists( $keys, $property = 'model' )
+	public function assign( $keys, $property = 'model' )
 	{
 		foreach ( (array)$keys as $key)
 		{

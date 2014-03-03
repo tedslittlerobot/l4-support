@@ -6,8 +6,8 @@ class OrderEnforcerTest extends \PHPUnit_Framework_TestCase {
 
 	public function setUp()
 	{
-		$this->orderer = m::mock('Tlr\Support\Database\Orderer');
-		$this->enforcer = new Tlr\Support\Database\OrderEnforcer($this->orderer);
+		$this->orderer = m::mock('Tlr\Support\Orderer');
+		$this->enforcer = new Tlr\Support\OrderEnforcer($this->orderer);
 	}
 
 	public function testEnforce()

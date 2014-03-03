@@ -1,8 +1,8 @@
-<?php namespace Tlr\Support\Database;
+<?php namespace Tlr\Support;
 
 class Orderer {
 
-	protected $base = 1;
+	protected $base = 0;
 
 	/**
 	 * Set the index base
@@ -49,7 +49,7 @@ class Orderer {
 	 * @param  string   $key    the property to assign the order to
 	 * @return array
 	 */
-	public function assignIndices( $list, $key = 'order' )
+	public function assignIndices( $list, $key = 'index' )
 	{
 		$newList = array_values( $list );
 

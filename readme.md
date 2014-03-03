@@ -6,13 +6,12 @@ L4 Support
 #### NB. This is still all subject to change
 
 - __[Html Macro](docs/html.md)__
-- _[Repository](docs/repository.md) (documentation not yet finished)_
-- _[Functions](docs/functions.md) (documentation not yet finished)_
-
-- _[Orderer](docs/orderer.md) (documentation not yet finished)_
-- _[Order Enforcer](docs/order-enforcer.md) (documentation not yet finished)_
-- _[Slugifier](docs/slugifier.md) (documentation not yet finished)_
-- _[Validation](docs/validation.md) (documentation not yet finished)_
+- __[Functions](docs/functions.md)__
+- __[Repository](docs/repository.md)__
+- __[Validation Rules](docs/validation.md)__
+- __[Orderer](docs/orderer.md)__
+- __[Order Enforcer](docs/order-enforcer.md)__
+- __[Slugifier](docs/slugifier.md)__
 
 
 ## Installation
