@@ -1,6 +1,7 @@
 {
     "name": "tlr/l4-support",
-    "description": "",
+    "description": "Helpers and Utilities for Laravel",
+    "keywords": ["laravel","order", "slug"],
     "authors": [
         {
             "name": "Stef Horner",
