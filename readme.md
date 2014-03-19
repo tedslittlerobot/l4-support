@@ -27,6 +27,6 @@ Add the following to your composer.json file:
 ],
 ```
 
-Then, you can `composer require tlr/l4-support` to add this to your composer.json and download it.
+Then add `"tlr/l4-support": "1.*"` to your composer.json's require object.
 
 For the HTML macro, and the Validation rules, you may want to add `Tlr\Support\SupportServiceProvider` to your `providers` list in `app.php`.
