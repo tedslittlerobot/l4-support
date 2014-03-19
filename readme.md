@@ -16,17 +16,6 @@ L4 Support
 
 ## Installation
 
-Add the following to your composer.json file:
-
-```json
-"repositories": [
-    {
-        "type": "git",
-        "url": "https://github.com/tedslittlerobot/l4-support"
-    }
-],
-```
-
-Then add `"tlr/l4-support": "1.*"` to your composer.json's require object.
+Add `"tlr/l4-support": "1.*"` to your composer.json's require object.
 
 For the HTML macro, and the Validation rules, you may want to add `Tlr\Support\SupportServiceProvider` to your `providers` list in `app.php`.
