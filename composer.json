@@ -15,9 +15,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Tlr\\Support\\": "src/"
+            "Tlr\\Support\\": "src/Support/"
         },
-        "files": ["src/functions.php"]
+        "files": ["src/Support/functions.php"]
     },
     "minimum-stability": "stable",
     "require-dev": {
