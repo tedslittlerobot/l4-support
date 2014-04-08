@@ -5,13 +5,6 @@ use Illuminate\Support\ServiceProvider;
 class EventRoutingServiceProvider extends ServiceProvider {
 
 	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
-
-	/**
 	 * Kick off the router using events
 	 * @return void
 	 */
@@ -33,15 +26,5 @@ class EventRoutingServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function register() {}
-
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return array();
-	}
 
 }
