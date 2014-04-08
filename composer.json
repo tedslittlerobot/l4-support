@@ -17,7 +17,7 @@
         "psr-4": {
             "Tlr\\Support\\": "src/Support/"
         },
-        "files": ["src/Support/functions.php"]
+        "files": ["src/Support/functions.php", "src/Auth/functions.php"]
     },
     "minimum-stability": "stable",
     "require-dev": {
