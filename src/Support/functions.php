@@ -3,7 +3,9 @@
 if ( ! function_exists('dot_get'))
 {
 	/**
-	 * Get a property out of mixed objects and arrays by dot notation
+	 * Get a property
+	 * using dot notation from
+	 * objects or arrays.
 	 *
 	 * @param  mixed    $haystack
 	 * @param  string   $key
@@ -31,7 +33,9 @@ if ( ! function_exists('dot_get'))
 if ( ! function_exists('array_find_dot'))
 {
 	/**
-	 * Find an item of an array by a dot notation accessible property
+	 * Search through an array
+	 * Use dot notation to match
+	 * Then return that thing.
 	 *
 	 * @param  string  $needle
 	 * @param  array   $haystack
@@ -56,7 +60,9 @@ if ( ! function_exists('array_find_dot'))
 if ( ! function_exists('array_splice_item'))
 {
 	/**
-	 * Find an item of an array by a dot notation accessible property
+	 * A wrapper around
+	 * array_search and array_splice
+	 * Convenient, no?
 	 *
 	 * @param  string  $needle
 	 * @param  array   $haystack

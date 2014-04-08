@@ -5,7 +5,10 @@ use Illuminate\Support\ServiceProvider;
 class EventRoutingServiceProvider extends ServiceProvider {
 
 	/**
-	 * Kick off the router using events
+	 * Routing with event
+	 * Both begins and finishes
+	 * Within this method
+	 *
 	 * @return void
 	 */
 	public function boot()

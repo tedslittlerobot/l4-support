@@ -10,7 +10,10 @@ class OrderEnforcer {
 		$this->orderer = $orderer;
 	}
 	/**
-	 * Enforce a strict incremental order, starting at the given index
+	 * Enforce an order
+	 * In a list of ORM models
+	 * Starting from a base
+	 *
 	 * @param  array $list
 	 */
 	public function enforce( $list, $base = 1, $key = 'index' )
@@ -29,7 +32,10 @@ class OrderEnforcer {
 	}
 
 	/**
-	 * Insert an item into a list
+	 * Insert an item
+	 * Into a list of items
+	 * Adjusts the order
+	 *
 	 * @param  array $list
 	 */
 	public function insert( $list, $item, $base = 1, $key = 'index' )
@@ -39,7 +45,9 @@ class OrderEnforcer {
 	}
 
 	/**
-	 * Move an item around an array
+	 * In a list of things
+	 * Moves one thing to somewhere else
+	 * And sets the order
 	 */
 	public function move( $list, $fromIndex, $toIndex, $base = 1, $key = 'index' )
 	{
@@ -48,7 +56,10 @@ class OrderEnforcer {
 	}
 
 	/**
-	 * Enforce a relationship order
+	 * It's some shorthand code
+	 * To take a relationship
+	 * And enforce order
+	 *
 	 * @param  Model   $parent       the parent model
 	 * @param  string  $relationship the relationship name
 	 * @param  string  $key          the order key - defaults to order

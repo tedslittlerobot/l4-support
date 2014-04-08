@@ -44,7 +44,10 @@ class Orderer {
 	}
 
 	/**
-	 * Assign the converted array index to a keyed property of the elements
+	 * Items in a list
+	 * Each one shall have their index
+	 * Assigned to a key
+	 *
 	 * @param  array   $list
 	 * @param  string   $key    the property to assign the order to
 	 * @return array
@@ -67,7 +70,10 @@ class Orderer {
 	}
 
 	/**
-	 * Insert an item into the array
+	 * A wrapper around
+	 * array_splice that converts 'twixt
+	 * An index and base
+	 *
 	 * @param  mixed   $new
 	 * @param  array   $list
 	 * @param  integer   $index  the order index
@@ -81,7 +87,10 @@ class Orderer {
 	}
 
 	/**
-	 * Move an item in an array
+	 * To move an item
+	 * In the context of a list
+	 * To another place
+	 *
 	 * @param  integer   $index       the order index to move from
 	 * @param  array   $list
 	 * @param  integer   $targetIndex the order index to move to
@@ -95,7 +104,10 @@ class Orderer {
 	}
 
 	/**
-	 * Find an item in an array and move it
+	 * Like the move method,
+	 * But performs an array_search
+	 * To get the index
+	 *
 	 * @param  mixed   $item
 	 * @param  array   $list
 	 * @param  integer   $targetIndex
