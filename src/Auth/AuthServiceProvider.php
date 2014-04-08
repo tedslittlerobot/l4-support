@@ -20,6 +20,8 @@ class AuthServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->commands('Tlr\Auth\UserMakeCommand');
+
+		$this->app->register('Tlr\Support\EventRoutingServiceProvider');
 	}
 
 	/**
