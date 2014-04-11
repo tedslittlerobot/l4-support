@@ -31,7 +31,7 @@ class AssetBlueprint {
 	 * @param  string|array $requirements
 	 * @return $this
 	 */
-	public function require( $requirements )
+	public function requires( $requirements )
 	{
 		$this->requirements = array_merge( $this->requirements, (array)$requirements );
 
@@ -56,7 +56,7 @@ class AssetBlueprint {
 	 */
 	public function css( $url, $options = array(), $attributes = array() )
 	{
-		$this->css[] = array(
+		$this->css[$url] = (object)array(
 			'url' => $url,
 			'options' => $options,
 			'attributes' => $attributes,
@@ -83,7 +83,7 @@ class AssetBlueprint {
 	 */
 	public function js( $url, $options = array(), $attributes = array() )
 	{
-		$this->js[] = array(
+		$this->js[$url] = (object)array(
 			'url' => $url,
 			'options' => $options,
 			'attributes' => $attributes,

@@ -3,7 +3,7 @@
 class AssetManager {
 
 	/**
-	 * The assets
+	 * The asset generators
 	 *
 	 * This is a 2-dimentional array - so that each asset
 	 * can be a stack of assets
@@ -28,7 +28,7 @@ class AssetManager {
 	{
 		if (!is_callable($assets))
 		{
-			throw new \InvalidArgumentsException("The second argument to register must be a callable");
+			throw new \InvalidArgumentException("The second argument to register must be a callable");
 		}
 
 		if ( ! is_array( array_get($this->assets, $key) ) )
@@ -81,6 +81,16 @@ class AssetManager {
 	}
 
 	/**
+	 * Get the global asset keys
+	 * @param  string $key
+	 * @return AssetBlueprint
+	 */
+	public function globals()
+	{
+		return $this->globals;
+	}
+
+	/**
 	 * Compile the given asset stack
 	 * @param  string $key
 	 * @return AssetBlueprint
@@ -89,7 +99,7 @@ class AssetManager {
 	{
 		$asset = new AssetBlueprint;
 
-		foreach ($this->getStack[$key] as $callable)
+		foreach ($this->getStack($key) as $callable)
 		{
 			call_user_func($callable, $asset);
 
