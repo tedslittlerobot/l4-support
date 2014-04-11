@@ -15,7 +15,29 @@ class AssetManager {
 	 * A list of global keys
 	 * @var array
 	 */
-	protected $globals = array();
+	protected $activeAssets = array();
+
+	/**
+	 * Add a global key
+	 * @param string|array $keys
+	 */
+	public function activate( $keys )
+	{
+		foreach ((array) $keys as $key)
+		{
+			if ( ! in_array($key, $this->activeAssets) )
+		if (!is_callable($assets))
+		{
+			throw new \InvalidArgumentException("The second argument to register must be a callable");
+		}
+
+			{
+				$this->activeAssets[] = $key;
+			}
+		}
+
+		return $this;
+	}
 
 	/**
 	 * Register a new asset
@@ -26,21 +48,16 @@ class AssetManager {
 	 */
 	public function register( $key, $assets, $global = false )
 	{
-		if (!is_callable($assets))
-		{
-			throw new \InvalidArgumentException("The second argument to register must be a callable");
-		}
-
 		if ( ! is_array( array_get($this->assets, $key) ) )
 		{
 			$this->assets[$key] = array();
 		}
 
-		array_unshift($this->assets[$key], $assets);
+		array_unshift($this->assets[$key], $assetGenerator);
 
-		if ( $global && !in_array($key, $this->globals) )
+		if ( $activate )
 		{
-			$this->globals[] = $key;
+			$this->activate( $key );
 		}
 
 		return $this;
@@ -85,9 +102,9 @@ class AssetManager {
 	 * @param  string $key
 	 * @return AssetBlueprint
 	 */
-	public function globals()
+	public function activeAssets()
 	{
-		return $this->globals;
+		return $this->activeAssets;
 	}
 
 	/**

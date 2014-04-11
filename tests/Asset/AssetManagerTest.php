@@ -12,13 +12,13 @@ class AssetManagerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGlobals()
 	{
-		$this->assertSame( [], $this->manager->globals() );
+		$this->assertSame( [], $this->manager->activeAssets() );
 
 		$this->manager->register('foo', function(){}, false);
 		$this->manager->register('bar', function(){}, true);
 		$this->manager->register('baz', function(){}, true);
 
-		$this->assertSame( ['bar', 'baz'], $this->manager->globals() );
+		$this->assertSame( ['bar', 'baz'], $this->manager->activeAssets() );
 	}
 
 	public function testRegisterSingleStack()
