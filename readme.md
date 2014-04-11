@@ -12,6 +12,7 @@ L4 Support
 - __[Orderer](docs/orderer.md)__
 - __[Order Enforcer](docs/order-enforcer.md)__
 - __[Slugifier](docs/slugifier.md)__
+- __[Routing with Events](docs/routing.md)__
 
 
 ## Installation
