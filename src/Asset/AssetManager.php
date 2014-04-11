@@ -26,11 +26,6 @@ class AssetManager {
 		foreach ((array) $keys as $key)
 		{
 			if ( ! in_array($key, $this->activeAssets) )
-		if (!is_callable($assets))
-		{
-			throw new \InvalidArgumentException("The second argument to register must be a callable");
-		}
-
 			{
 				$this->activeAssets[] = $key;
 			}
@@ -46,7 +41,7 @@ class AssetManager {
 	 * @param  boolean $global
 	 * @return $this
 	 */
-	public function register( $key, $assets, $global = false )
+	public function register( $key, callable $assetGenerator, $activate = false )
 	{
 		if ( ! is_array( array_get($this->assets, $key) ) )
 		{

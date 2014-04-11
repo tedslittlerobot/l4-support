@@ -66,7 +66,7 @@ class AssetManagerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testInvalidRegisterArgument()
 	{
-		$this->setExpectedException('InvalidArgumentException');
+		$this->setExpectedException('Exception');
 
 		$this->manager->register('foo', 'bar');
 	}
