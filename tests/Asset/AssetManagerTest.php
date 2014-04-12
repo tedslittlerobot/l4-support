@@ -48,6 +48,21 @@ class AssetManagerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( [$func2, $func1], $this->manager->getStack('foo') );
 	}
 
+	public function testRegisterMultiStackOverwrites()
+	{
+		$func1 = function( AssetBlueprint $bp ) { $bp->require('bar'); };
+		$this->manager->register('foo', $func1);
+
+		$this->assertSame( [$func1], $this->manager->getStack('foo') );
+
+		$func2 = function( AssetBlueprint $bp ) { $bp->overwrite(); };
+		$this->manager->register('foo', $func2);
+
+		$blueprint = $this->manager->get('foo');
+
+		$this->assertSame( [], $blueprint->requirements() );
+	}
+
 	public function testCompileAssetStack()
 	{
 		$bps = [];

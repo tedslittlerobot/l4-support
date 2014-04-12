@@ -115,7 +115,10 @@ class AssetManager {
 		{
 			call_user_func($callable, $asset);
 
-			if ( $asset->overwrites() ) break;
+			if ( $asset->overwrites() )
+			{
+				break;
+			}
 		}
 
 		return $asset;
