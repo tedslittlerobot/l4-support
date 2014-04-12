@@ -85,4 +85,33 @@ class AssetManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$this->manager->register('foo', 'bar');
 	}
+
+	public function testResolveLinearRequirements()
+	{
+		$bps = [];
+
+		$this->manager->register('foo',
+			function( AssetBlueprint $bp ) use ( &$bps ) {
+				$bp->js('javascript');
+				$bp->requires('bar');
+				$bps['foo'] = $bp;
+			}
+		);
+
+		$this->manager->register('bar',
+			function( AssetBlueprint $bp ) use ( &$bps ) {
+				$bp->js('javascript');
+				$bps['bar'] = $bp;
+			}
+		);
+
+		$results = $this->manager->resolve('foo');
+
+		$expected = array(
+			'bar' => $bps['bar'],
+			'foo' => $bps['foo'],
+		);
+
+		$this->assertSame( $expected, $results );
+	}
 }

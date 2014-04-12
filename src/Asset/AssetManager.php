@@ -123,4 +123,25 @@ class AssetManager {
 
 		return $asset;
 	}
+
+	public function resolve( $keys )
+	{
+		$stack = array();
+
+		foreach( (array)$keys as $key )
+		{
+			if ( in_array($key, $stack) )
+			{
+				continue;
+			}
+
+			$asset = $this->get($key);
+
+			$stack[$key] = $asset;
+
+			$stack = array_merge( $this->resolve($asset->requirements()), $stack );
+		}
+
+		return $stack;
+	}
 }
