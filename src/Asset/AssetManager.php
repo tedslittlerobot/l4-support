@@ -63,14 +63,31 @@ class AssetManager {
 	 * @param  string $position the position of the js assets
 	 * @return array
 	 */
-	public function getJS( $position = 'footer' ) { return array(); }
+	public function getJS( $position = 'footer' ) {
+		return array_filter(
+			$this->resolve( $this->activeAssets() ),
+			function( AssetBlueprint $item )
+			{
+				return ! empty( $item->getJs() );
+			}
+		);
+	}
 
 	/**
 	 * Get an array of CSS assets
 	 * @param  string $position the position of the css assets
 	 * @return array
 	 */
-	public function getStyles() { return array(); }
+	public function getStyles()
+	{
+		return array_filter(
+			$this->resolve( $this->activeAssets() ),
+			function( AssetBlueprint $item )
+			{
+				return ! empty( $item->getCss() );
+			}
+		);
+	}
 
 	/**
 	 * Get an asset stack by key
@@ -124,13 +141,18 @@ class AssetManager {
 		return $asset;
 	}
 
+	/**
+	 * Resolve the given dependancies
+	 * @param  string|array $keys
+	 * @return array
+	 */
 	public function resolve( $keys )
 	{
 		$stack = array();
 
 		foreach( (array)$keys as $key )
 		{
-			if ( in_array($key, $stack) )
+			if ( isset($stack[$key]) )
 			{
 				continue;
 			}

@@ -114,4 +114,82 @@ class AssetManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertSame( $expected, $results );
 	}
+
+	public function testGetCss()
+	{
+		$bps = [];
+
+		$this->manager->register('foo',
+			function( AssetBlueprint $bp ) use ( &$bps ) {
+				$bp->js('javascript');
+				$bps['foo'] = $bp;
+			}
+		);
+
+		$this->manager->register('bar',
+			function( AssetBlueprint $bp ) use ( &$bps ) {
+				$bp->css('css');
+				$bps['bar'] = $bp;
+			}
+		);
+
+		$this->manager->activate(['foo', 'bar']);
+
+		$results = $this->manager->getStyles('foo');
+
+		$expected = array(
+			'bar' => $bps['bar'],
+		);
+
+		$this->assertSame( $expected, $results );
+	}
+
+	public function testGetJs()
+	{
+		$bps = [];
+
+		$this->manager->register('foo',
+			function( AssetBlueprint $bp ) use ( &$bps ) {
+				$bp->js('javascript');
+				$bps['foo'] = $bp;
+			}
+		);
+
+		$this->manager->register('bar',
+			function( AssetBlueprint $bp ) use ( &$bps ) {
+				$bp->css('css');
+				$bps['bar'] = $bp;
+			}
+		);
+
+		$this->manager->activate(['foo', 'bar']);
+
+		$results = $this->manager->getJs('foo');
+
+		$expected = array(
+			'foo' => $bps['foo'],
+		);
+
+		$this->assertSame( $expected, $results );
+	}
+
+	public function testResolveSkipsResolvedAssets()
+	{
+		$bps = [];
+
+		$this->manager->register('foo',
+			function( AssetBlueprint $bp ) use ( &$bps ) {
+				$bps[] = $bp;
+			}
+		);
+
+		$results = $this->manager->resolve(['foo', 'foo']);
+
+		$expected = array(
+			'foo' => $bps[0],
+		);
+
+		$this->assertEquals( 1, count($bps) );
+		$this->assertSame( $expected, $results );
+	}
 }

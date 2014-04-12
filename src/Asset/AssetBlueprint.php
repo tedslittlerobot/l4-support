@@ -96,7 +96,7 @@ class AssetBlueprint {
 	 * Get the blueprint's getJS
 	 * @return array
 	 */
-	public function getJS()
+	public function getJs()
 	{
 		return $this->js;
 	}
