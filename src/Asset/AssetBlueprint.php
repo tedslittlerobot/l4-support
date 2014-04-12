@@ -96,9 +96,19 @@ class AssetBlueprint {
 	 * Get the blueprint's getJS
 	 * @return array
 	 */
-	public function getJs()
+	public function getJs( $position = null )
 	{
-		return $this->js;
+		$js = $this->js;
+
+		if (!is_null($position))
+		{
+			$js = array_filter($js, function($item) use ($position)
+			{
+				return dot_get($item, 'options.position') == $position;
+			});
+		}
+
+		return $js;
 	}
 
 	/**

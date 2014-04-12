@@ -120,14 +120,16 @@ class AssetManagerTest extends \PHPUnit_Framework_TestCase {
 		$bps = [];
 
 		$this->manager->register('foo',
-			function( AssetBlueprint $bp ) use ( &$bps ) {
+			function( AssetBlueprint $bp ) use ( &$bps )
+			{
 				$bp->js('javascript');
 				$bps['foo'] = $bp;
 			}
 		);
 
 		$this->manager->register('bar',
-			function( AssetBlueprint $bp ) use ( &$bps ) {
+			function( AssetBlueprint $bp ) use ( &$bps )
+			{
 				$bp->css('css');
 				$bps['bar'] = $bp;
 			}
@@ -135,13 +137,15 @@ class AssetManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$this->manager->activate(['foo', 'bar']);
 
-		$results = $this->manager->getStyles('foo');
+		$results = $this->manager->getStyles();
 
-		$expected = array(
-			'bar' => $bps['bar'],
+		$expected = (object)array(
+			'url' => 'css',
+			'options' => array(),
+			'attributes' => array(),
 		);
 
-		$this->assertSame( $expected, $results );
+		$this->assertEquals( [$expected], $results );
 	}
 
 	public function testGetJs()
@@ -149,14 +153,16 @@ class AssetManagerTest extends \PHPUnit_Framework_TestCase {
 		$bps = [];
 
 		$this->manager->register('foo',
-			function( AssetBlueprint $bp ) use ( &$bps ) {
+			function( AssetBlueprint $bp ) use ( &$bps )
+			{
 				$bp->js('javascript');
 				$bps['foo'] = $bp;
 			}
 		);
 
 		$this->manager->register('bar',
-			function( AssetBlueprint $bp ) use ( &$bps ) {
+			function( AssetBlueprint $bp ) use ( &$bps )
+			{
 				$bp->css('css');
 				$bps['bar'] = $bp;
 			}
@@ -164,13 +170,15 @@ class AssetManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$this->manager->activate(['foo', 'bar']);
 
-		$results = $this->manager->getJs('foo');
+		$results = $this->manager->getJs(null);
 
-		$expected = array(
-			'foo' => $bps['foo'],
+		$expected = (object)array(
+			'url' => 'javascript',
+			'options' => array(),
+			'attributes' => array(),
 		);
 
-		$this->assertSame( $expected, $results );
+		$this->assertEquals( [$expected], $results );
 	}
 
 	public function testResolveSkipsResolvedAssets()

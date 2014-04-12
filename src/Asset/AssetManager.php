@@ -63,14 +63,20 @@ class AssetManager {
 	 * @param  string $position the position of the js assets
 	 * @return array
 	 */
-	public function getJS( $position = 'footer' ) {
-		return array_filter(
-			$this->resolve( $this->activeAssets() ),
-			function( AssetBlueprint $item )
+	public function getJS( $position = 'footer' )
+	{
+		$js = array();
+
+		foreach ($this->resolve( $this->activeAssets() ) as $asset)
+		{
+			// dd( $asset->getJs() );
+			foreach ($asset->getJs($position) as $script)
 			{
-				return ! empty( $item->getJs() );
+				$js[] = $script;
 			}
-		);
+		}
+
+		return $js;
 	}
 
 	/**
@@ -80,13 +86,17 @@ class AssetManager {
 	 */
 	public function getStyles()
 	{
-		return array_filter(
-			$this->resolve( $this->activeAssets() ),
-			function( AssetBlueprint $item )
+		$styles = array();
+
+		foreach ($this->resolve( $this->activeAssets() ) as $asset)
+		{
+			foreach ($asset->getCss() as $script)
 			{
-				return ! empty( $item->getCss() );
+				$styles[] = $script;
 			}
-		);
+		}
+
+		return $styles;
 	}
 
 	/**
