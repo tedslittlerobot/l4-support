@@ -95,5 +95,42 @@ class FileDriver /*implements CdnDriverInterface*/ {
 		return $filename;
 	}
 
+	/**
+	 * @inheritdoc
+	 */
+	public function save( File $file, $namespace = '', $overwrite = false )
+	{
+		// @TODO: get filename
+		$filename = '';
+
+		// @TODO: use SplFileInfo, rather than SymfonyFile
+		Input::file('photo')->move( $this->path() );
+
+		return $filename;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function delete( $filename, $namespace = '' )
+	{
+		return $this->files->delete( $this->path( $this->filename( $filename, $namespace ) ) );
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function get( $filename, $namespace = '' )
+	{
+		return $this->files->get( $this->path( $this->filename( $filename, $namespace ) ) );
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function url( $filename, $namespace = '' )
+	{
+		return URL::to( $this->path( $this->filename( $filename, $namespace ) ) );
+	}
 
 }
