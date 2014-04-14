@@ -33,7 +33,12 @@ class AssetBlueprint {
 	 */
 	public function requires( $requirements )
 	{
-		$this->requirements = array_merge( $this->requirements, (array)$requirements );
+		if ( ! is_array($requirements) )
+		{
+			$requirements = func_get_args();
+		}
+
+		$this->requirements = array_merge( $this->requirements, $requirements );
 
 		return $this;
 	}
