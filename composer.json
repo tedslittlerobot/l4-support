@@ -15,13 +15,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Tlr\\Support\\": "src/Support/"
+            "Tlr\\": "src/"
         },
         "files": ["src/Support/functions.php", "src/Auth/functions.php"]
     },
     "minimum-stability": "stable",
     "require-dev": {
         "mockery/mockery": "dev-master",
-        "patchwork/utf8": "1.1.*"
+        "patchwork/utf8": "1.1.*",
+        "illuminate/console": "4.1.*"
     }
 }

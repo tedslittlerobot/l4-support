@@ -23,6 +23,16 @@ if ( ! function_exists('dot_get'))
 				return value($default);
 			}
 
+			if (is_object($haystack) && !isset($haystack->{$segment}))
+			{
+				return value($default);
+			}
+
+			if (is_array($haystack) && !isset($haystack[$segment]))
+			{
+				return value($default);
+			}
+
 			$haystack = is_object($haystack) ? $haystack->{$segment} : $haystack[$segment];
 		}
 
