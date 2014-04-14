@@ -1,0 +1,81 @@
+Asset Management
+================
+
+> Managing Assets
+
+> Need not be labourious
+
+> When you think it through
+
+### Setup
+
+- Add the service provider: `Tlr\Asset\AssetServiceProvider`
+- Add the facade alias: `'Asset' => 'Tlr\Asset\AssetFacade'`
+
+### Register assets
+
+```php
+// Register jQuery
+Asset::register('jquery', function( AssetBlueprint $asset )
+{
+	// add a js file
+	$asset->js('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js');
+});
+
+// Register jQuery UI
+Asset::register('jquery-ui', function( $asset )
+{
+	// add a js file
+	$asset->js('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js');
+	// add a css file
+	$asset->css('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css');
+
+	// require the jQuery asset
+	$asset->requires('jquery');
+});
+
+// Register a script for some ui based admin panels
+Asset::register('admin-panels', function( $asset )
+{
+	// add a js file
+	$asset->js('/js/admin-panels.js');
+
+	// require jquery ui
+	// The requires method can take an array of multiple requirements, or
+	// a list of requirements. It can be called multiple times to add
+	// dependancies
+	$asset->requires('jquery-ui');
+});
+```
+
+### Activate
+
+In you code, specify what assets you want to use:
+
+```php
+Asset::activate('admin-panels');
+```
+
+Or define it as a route filter:
+
+```php
+Route::group(['prefix' => 'admin', 'filter' => 'auth|asset:admin-panels']);
+```
+
+### Render
+
+Now in your header, get your css files:
+
+```php
+foreach( Asset::getStyles() as $asset ) {
+	echo '<link rel="stylesheet" type="text/css" href="' . $asset->url .'">';
+}
+```
+
+and your js files for your footer:
+
+```php
+foreach( Asset::getJs() as $asset ) {
+	echo '<script src="' . $asset->url . '"></script>';
+}
+```
