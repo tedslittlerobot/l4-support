@@ -162,15 +162,18 @@ class AuthServiceProvider extends ServiceProvider {
 		return array();
 	}
 
-	/**
-	 * Override method for more shallow file structure
-	 * @inheritdoc
-	 */
-	public function guessPackagePath()
+	public function package($package, $namespace = null, $path = null)
 	{
-		$path = with(new \ReflectionClass($this))->getFileName();
+		$namespace = $this->getPackageNamespace($package, $namespace);
 
-		return realpath(dirname($path).'/../');
+		$path = $path ?: $this->guessPackagePath();
+
+		$view = $path.'/resources/views/auth';
+
+		if ($this->app['files']->isDirectory($view))
+		{
+			$this->app['view']->addNamespace($namespace, $view);
+		}
 	}
 
 }
