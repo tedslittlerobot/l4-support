@@ -67,15 +67,11 @@ Route::group(['prefix' => 'admin', 'filter' => 'auth|asset:admin-panels']);
 Now in your header, get your css files:
 
 ```php
-foreach( Asset::getStyles() as $asset ) {
-	echo '<link rel="stylesheet" type="text/css" href="' . $asset->url .'">';
-}
+@asset-styles
 ```
 
 and your js files for your footer:
 
 ```php
-foreach( Asset::getJs() as $asset ) {
-	echo '<script src="' . $asset->url . '"></script>';
-}
+@asset-js
 ```
