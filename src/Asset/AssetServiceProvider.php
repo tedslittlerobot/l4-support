@@ -11,6 +11,8 @@ class AssetServiceProvider extends ServiceProvider {
 
 	public function boot()
 	{
+		$this->package( 'tlr/l4-support', 'tlr-asset' );
+
 		$this->app['blade']->extend(function($view, $compiler)
 		{
 			foreach (array('styles', 'js', 'header-js') as $namespace)
@@ -49,6 +51,20 @@ class AssetServiceProvider extends ServiceProvider {
 	public function provides()
 	{
 		return array('assets');
+	}
+
+	public function package($package, $namespace = null, $path = null)
+	{
+		$namespace = $this->getPackageNamespace($package, $namespace);
+
+		$path = $path ?: $this->guessPackagePath();
+
+		$view = $path . 'resources/views/' . str_replace('tlr-', '', $namespace);
+
+		if ($this->app['files']->isDirectory($view))
+		{
+			$this->app['view']->addNamespace($namespace, $view);
+		}
 	}
 
 }
