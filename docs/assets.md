@@ -75,3 +75,16 @@ and your js files for your footer:
 ```php
 @asset-js
 ```
+
+### Versions
+
+If you use the above blade tags, you can also add a version to a js or css asset that will be subbed into the url - for example the built-in jquery declaration looks similar to this:
+
+```php
+Asset::register('jquery', function( AssetBlueprint $asset )
+{
+	// add a js file
+	$asset->js( '//ajax.googleapis.com/ajax/libs/jquery/{version}/jquery.min.js', ['version' => '1.11.0'] );
+});
+```
+
