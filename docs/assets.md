@@ -104,6 +104,17 @@ Asset::register('jquery', function( AssetBlueprint $asset )
 });
 ```
 
+If you want to *completely overwrite* an asset, you can use the `overwrite` method. In the following example, the above two jquery definitions won't have any effect - jquery will only load the single new js file:
+
+```php
+Asset::register('jquery', function( AssetBlueprint $asset )
+{
+	$asset->js('/my/own/jquery.js');
+
+	// Specify that this asset definition won't extend the previously defined ones
+	$asset->overwrite();
+});
+
 ### Predefined Assets
 
 The following assets are defined already:
