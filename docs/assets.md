@@ -95,10 +95,11 @@ You can override a defined asset - if we assume jquery has been defined as above
 ```php
 Asset::register('jquery', function( AssetBlueprint $asset )
 {
-	// override the version of the previous one
-	$asset->js( '//ajax.googleapis.com/ajax/libs/jquery/{version}/jquery.min.js', ['version' => '2.1.0'] );
+	// override the version of previously defined tags
+	$asset->version( '2.1.0' );
 
 	// add another js file to this asset (probably wouldn't do this on the jquery definition...!)
+	// note that this won't have the version string defined above
 	$asset->js( '/local/js/plugin.js' );
 });
 ```

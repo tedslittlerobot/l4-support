@@ -136,4 +136,24 @@ class AssetBlueprint {
 	{
 		return $this->overwrites;
 	}
+
+	/**
+	 * Update the version tag of all asset files
+	 * @param  string $version
+	 * @return $this
+	 */
+	public function version( $version )
+	{
+		foreach ($this->js as $script)
+		{
+			$script->options['version'] = $version;
+		}
+
+		foreach ($this->css as $script)
+		{
+			$script->options['version'] = $version;
+		}
+
+		return $this;
+	}
 }
