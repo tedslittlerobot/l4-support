@@ -88,3 +88,15 @@ Asset::register('jquery', function( AssetBlueprint $asset )
 });
 ```
 
+### Predefined Assets
+
+The following assets are defined already:
+
+Key                                      | JS  | CSS | Version
+-----------------------------------------|-----|-----|---------
+[jquery](http://jquery.com/)             | yay | nay | 1.11.0
+[jquery-ui](http://jqueryui.com/)        | yay | yay | 1.10.4
+[angular](http://angularjs.org/)         | yay | nay | 1.2.15
+[bootstrap](http://getbootstrap.com/)    | yay | yay | 3.1.1
+[gumby](http://gumbyframework.com/)      | nay | yay | 2.5.11
+[semantic-ui](http://semantic-ui.com/)   | nay | yay | 0.13.0
