@@ -83,8 +83,23 @@ If you use the above blade tags, you can also add a version to a js or css asset
 ```php
 Asset::register('jquery', function( AssetBlueprint $asset )
 {
-	// add a js file
+	// added a version to the "options" array as the second argument
 	$asset->js( '//ajax.googleapis.com/ajax/libs/jquery/{version}/jquery.min.js', ['version' => '1.11.0'] );
+});
+```
+
+### Overriding
+
+You can override a defined asset - if we assume jquery has been defined as above:
+
+```php
+Asset::register('jquery', function( AssetBlueprint $asset )
+{
+	// override the version of the previous one
+	$asset->js( '//ajax.googleapis.com/ajax/libs/jquery/{version}/jquery.min.js', ['version' => '2.1.0'] );
+
+	// add another js file to this asset (probably wouldn't do this on the jquery definition...!)
+	$asset->js( '/local/js/plugin.js' );
 });
 ```
 
