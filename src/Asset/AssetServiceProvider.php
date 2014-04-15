@@ -11,6 +11,21 @@ class AssetServiceProvider extends ServiceProvider {
 
 	public function boot()
 	{
+		$this->app['blade']->extend(function($view, $compiler)
+		{
+			foreach (array('styles', 'js', 'header-js') as $namespace)
+			{
+				$pattern = $compiler->createPlainMatcher( "asset-{$namespace}" );
+				$view = preg_replace($pattern, "$1<?php echo View::make('tlr-asset::{$namespace}')->render(); ?>", $view);
+			}
+
+			return $view;
+		});
+
+
+		/**
+		 * @todo: add variadic input
+		 */
 		$this->app['router']->filter('asset', function($route, $request, $asset)
 		{
 			$this->app['assets']->activate( $asset );
