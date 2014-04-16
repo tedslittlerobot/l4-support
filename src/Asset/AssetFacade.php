@@ -1,7 +1,9 @@
 <?php namespace Tlr\Asset;
 
+use Illuminate\Support\Facades\Facade;
+
 /**
- * @see \Illuminate\Events\Dispatcher
+ * @see \Tlr\Asset\AssetManager
  */
 class AssetFacade extends Facade {
 
