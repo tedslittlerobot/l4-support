@@ -63,13 +63,12 @@ class AssetManager {
 	 * @param  string $position the position of the js assets
 	 * @return array
 	 */
-	public function getJS( $position = 'footer' )
+	public function getJS( $position = null )
 	{
 		$js = array();
 
 		foreach ($this->resolve( $this->activeAssets() ) as $asset)
 		{
-			// dd( $asset->getJs() );
 			foreach ($asset->getJs($position) as $script)
 			{
 				$js[] = $script;
