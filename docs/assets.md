@@ -114,6 +114,7 @@ Asset::register('jquery', function( AssetBlueprint $asset )
 	// Specify that this asset definition won't extend the previously defined ones
 	$asset->overwrite();
 });
+```
 
 ### Predefined Assets
 
