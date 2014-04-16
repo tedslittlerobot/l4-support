@@ -68,7 +68,7 @@ class AssetServiceProvider extends ServiceProvider {
 			});
 			$assetManager->register('gumby', function($asset)
 			{
-				$asset->js('//cdn.jsdelivr.net/gumby/{version}/css/gumby.css', array('version' => '2.5.11'));
+				$asset->css('//cdn.jsdelivr.net/gumby/{version}/css/gumby.css', array('version' => '2.5.11'));
 			});
 			$assetManager->register('semantic-ui', function($asset)
 			{

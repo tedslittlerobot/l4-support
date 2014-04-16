@@ -3,7 +3,7 @@
 	{{ HTML::element(
 		'link',
 		array_merge( [
-			'href' => preg_replace('{version}', array_get($asset->options, 'version'), $asset->url),
+			'href' => str_replace('{version}', array_get($asset->options, 'version'), $asset->url),
 			'rel' => 'stylesheet',
 			'type' => 'text/css'
 			], $asset->attributes )
