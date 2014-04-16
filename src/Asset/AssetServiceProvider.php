@@ -39,6 +39,8 @@ class AssetServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		$this->app->register('Tlr\Support\SupportServiceProvider');
+
 		$this->app->bindShared('assets', function()
 		{
 			$assetManager = new AssetManager;
