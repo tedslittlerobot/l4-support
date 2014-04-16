@@ -1,4 +1,4 @@
-
+<!--     ///// STYLES /////     -->
 @foreach( Asset::getStyles() as $asset )
 	{{ HTML::element(
 		'link',
@@ -8,4 +8,5 @@
 			'type' => 'text/css'
 			], $asset->attributes )
 	) }}
+
 @endforeach
