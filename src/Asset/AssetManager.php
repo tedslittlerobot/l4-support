@@ -18,7 +18,10 @@ class AssetManager {
 	protected $activeAssets = array();
 
 	/**
-	 * Add a global key
+	 * Activate assets.
+	 * Can be done with arrays, or
+	 * Variadically
+	 *
 	 * @param string|array $keys
 	 */
 	public function activate( $keys )
@@ -35,7 +38,10 @@ class AssetManager {
 	}
 
 	/**
-	 * Register a new asset
+	 * Register assets:
+	 * Pass a key, and callable
+	 * that will define it.
+	 *
 	 * @param  string  $key
 	 * @param  callable  $assets
 	 * @param  boolean $global
@@ -59,7 +65,10 @@ class AssetManager {
 	}
 
 	/**
-	 * Get an array of JS assets
+	 * Resolve the assets.
+	 * Only show javascript ones.
+	 * Return the objects.
+	 *
 	 * @param  string $position the position of the js assets
 	 * @return array
 	 */
@@ -79,7 +88,10 @@ class AssetManager {
 	}
 
 	/**
-	 * Get an array of CSS assets
+	 * Resolve the assets.
+	 * Only show CSS ones.
+	 * Return the objects.
+
 	 * @param  string $position the position of the css assets
 	 * @return array
 	 */
@@ -99,7 +111,10 @@ class AssetManager {
 	}
 
 	/**
-	 * Get an asset stack by key
+	 * For internal use.
+	 * Get the definition stack
+	 * For the given key
+	 *
 	 * @param  string $key
 	 * @return array
 	 */
@@ -109,7 +124,10 @@ class AssetManager {
 	}
 
 	/**
-	 * Get the given asset
+	 * Get assets by key.
+	 * Run Generator functions.
+	 * Return a Blueprint.
+	 *
 	 * @param  string $key
 	 * @return AssetBlueprint
 	 */
@@ -119,7 +137,10 @@ class AssetManager {
 	}
 
 	/**
-	 * Get the global asset keys
+	 * For internal use.
+	 * Get the active assets list.
+	 * (Returns only keys)
+	 *
 	 * @param  string $key
 	 * @return AssetBlueprint
 	 */
@@ -129,7 +150,7 @@ class AssetManager {
 	}
 
 	/**
-	 * Compile the given asset stack
+	 * @see get
 	 * @param  string $key
 	 * @return AssetBlueprint
 	 */
@@ -151,7 +172,10 @@ class AssetManager {
 	}
 
 	/**
-	 * Resolve the given dependancies
+	 * For internal use.
+	 * Resolve some dependancies.
+	 * Returns some Blueprints
+	 *
 	 * @param  string|array $keys
 	 * @return array
 	 */
