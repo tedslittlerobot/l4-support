@@ -13,7 +13,7 @@ interface CdnDriverInterface {
 	 * @param  string $directory
 	 * @return string              the saved file name
 	 */
-	public function save( File $file, $namespace = '', $overwrite = false );
+	public function save( $file, $overwrite = false );
 
 	/**
 	 * The file that is passed
@@ -21,10 +21,9 @@ interface CdnDriverInterface {
 	 * Nothing shall remain
 	 *
 	 * @param  string $filename
-	 * @param  string $namespace
 	 * @return boolean
 	 */
-	public function delete( $filename, $namespace = '' );
+	public function delete( $filename );
 
 	/**
 	 * Read the given file
@@ -32,32 +31,18 @@ interface CdnDriverInterface {
 	 * Returns the contents
 	 *
 	 * @param  string $filename
-	 * @param  string $namespace
 	 * @return string              the file contents
 	 */
-	public function get( $filename, $namespace = '' );
-
-	/**
-	 * It takes the two strings,
-	 * Making a versioned filename,
-	 * Then it returns that.
-	 *
-	 * @param  string $filename
-	 * @param  string $version
-	 * @return string
-	 */
-	public function filename( $filename, $version = null );
+	public function get( $filename  );
 
 	/**
 	 * A link shall be made
 	 * To the item in question
 	 * Returns null on fail
 	 *
-	 * is not linkable
 	 * @param  string $filename
-	 * @param  string $namespace
 	 * @return string
 	 */
-	public function url( $filename, $namespace = '' );
+	public function url( $filename, $version = null );
 
 }

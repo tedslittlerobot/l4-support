@@ -2,6 +2,9 @@
 
 use Tlr\Support\Manager;
 
+/**
+ * Needs Redo.
+ */
 class CdnManager extends Manager {
 
 	public function createFileDriver( $config )

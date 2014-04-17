@@ -22,7 +22,7 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	 * The manipulations to apply to the files
 	 * @var array
 	 */
-	// protected $manipulations = array();
+	protected $manipulations = array();
 
 	public function __construct( Filesystem $files, $config = array() )
 	{
@@ -72,55 +72,36 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	/**
 	 * @inheritdoc
 	 */
-	public function filename( $filename, $version = null )
+	public function save( $file, $namespace = '', $overwrite = false )
 	{
-		$components = explode($filename, '.');
+		/**
+		 * - Get file - handle SplFileInfo, and string
+		 * - Generate filename
+		 * - Eval Upload dir
+		 * - Upload
+		 * - Repeat for Manipulations
+		 * - Return filename
+		 */
 
-		$extension = array_pop($components);
-
-		if (count($components) > 1)
-		{
-			array_pop($components);
-		}
-
-		$filename = Str::slug( implode('.', $components) );
-
-		if ( is_string( $version ) )
-		{
-			$filename = "{$filename}.{$version}";
-		}
-
-		$filename = "{$filename}.{$extension}";
-
-		return $filename;
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function save( File $file, $namespace = '', $overwrite = false )
-	{
 		// @TODO: get filename
 		$filename = '';
 
-		// @TODO: use SplFileInfo, rather than SymfonyFile
-		Input::file('photo')->move( $this->path() );
-
 		return $filename;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function delete( $filename, $namespace = '' )
+	public function delete( $filename )
 	{
+		// @TODO: delete manipulations
 		return $this->files->delete( $this->path( $this->filename( $filename, $namespace ) ) );
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function get( $filename, $namespace = '' )
+	public function get( $filename, $version = null )
 	{
 		return $this->files->get( $this->path( $this->filename( $filename, $namespace ) ) );
 	}
@@ -128,7 +109,7 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	/**
 	 * @inheritdoc
 	 */
-	public function url( $filename, $namespace = '' )
+	public function url( $filename, $version = null )
 	{
 		return URL::to( $this->path( $this->filename( $filename, $namespace ) ) );
 	}
