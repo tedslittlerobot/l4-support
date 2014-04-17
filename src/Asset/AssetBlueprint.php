@@ -27,7 +27,10 @@ class AssetBlueprint {
 	protected $overwrites = false;
 
 	/**
-	 * Add one or many requirements
+	 * Require assets.
+	 * Supply variadically,
+	 * Or as an array.
+	 *
 	 * @param  string|array $requirements
 	 * @return $this
 	 */
@@ -44,7 +47,10 @@ class AssetBlueprint {
 	}
 
 	/**
-	 * Get the blueprint's requirements
+	 * For internal use.
+	 * List all the other assets
+	 * This asset requires.
+	 *
 	 * @return array
 	 */
 	public function requirements()
@@ -53,7 +59,10 @@ class AssetBlueprint {
 	}
 
 	/**
-	 * Add a CSS file to the asset blueprint
+	 * Add an asset file.
+	 * A URL is needed.
+	 * Options are extra.
+	 *
 	 * @param  string $url
 	 * @param  array  $options
 	 * @param  array  $attributes
@@ -71,7 +80,10 @@ class AssetBlueprint {
 	}
 
 	/**
-	 * Get the blueprint's getCss
+	 * Get the CSS
+	 * All files linked to this asset
+	 * Shall be returned
+	 *
 	 * @return array
 	 */
 	public function getCss()
@@ -80,7 +92,10 @@ class AssetBlueprint {
 	}
 
 	/**
-	 * Add a javascript file to the asset blueprint
+	 * Add an asset file.
+	 * A URL is needed.
+	 * Options are extra.
+	 *
 	 * @param  string $url
 	 * @param  array  $options
 	 * @param  array  $attributes
@@ -98,7 +113,10 @@ class AssetBlueprint {
 	}
 
 	/**
-	 * Get the blueprint's getJS
+	 * Get the Javascript
+	 * All files linked to this asset
+	 * Shall be returned
+	 *
 	 * @return array
 	 */
 	public function getJs( $position = null )
@@ -129,7 +147,10 @@ class AssetBlueprint {
 	}
 
 	/**
-	 * Determine if this asset should overwrite its parents
+	 * For internal use.
+	 * Make this asset override
+	 * All that went before.
+	 *
 	 * @return boolean
 	 */
 	public function overwrites()
@@ -138,7 +159,10 @@ class AssetBlueprint {
 	}
 
 	/**
-	 * Update the version tag of all asset files
+	 * Bulk-set the version
+	 * Of all files defined thus far
+	 * To that which is giv'n
+	 *
 	 * @param  string $version
 	 * @return $this
 	 */
