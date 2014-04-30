@@ -5,6 +5,17 @@ use Symfony\Component\HttpFoundation\File;
 interface CdnDriverInterface {
 
 	/**
+	 * Save the file passed through
+	 * Process as neccessary
+	 * Then return its name
+	 *
+	 * @param  File   $file
+	 * @param  string $directory
+	 * @return string              the saved file name
+	 */
+	public function save( $file, $overwrite = false );
+
+	/**
 	 * Take the given file
 	 * Save it somewhere relevant
 	 * Then return its name
@@ -13,7 +24,7 @@ interface CdnDriverInterface {
 	 * @param  string $directory
 	 * @return string              the saved file name
 	 */
-	public function save( $file, $overwrite = false );
+	public function writeFile( File $file, $name );
 
 	/**
 	 * The file that is passed

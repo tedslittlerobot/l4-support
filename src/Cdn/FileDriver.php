@@ -77,8 +77,7 @@ class FileDriver /*implements CdnDriverInterface*/ {
 		/**
 		 * - Get file - handle SplFileInfo, and string
 		 * - Generate filename
-		 * - Eval Upload dir
-		 * - Upload
+		 * - Upload (ie. call writeFile)
 		 * - Repeat for Manipulations
 		 * - Return filename
 		 */
@@ -87,6 +86,19 @@ class FileDriver /*implements CdnDriverInterface*/ {
 		$filename = '';
 
 		return $filename;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function writeFile( File $file, $name )
+	{
+		/**
+		 * - Eval Upload directory
+		 * - Write file
+		 */
+
+		return $this;
 	}
 
 	/**
