@@ -73,7 +73,7 @@ class AssetBlueprint {
 		$this->css[$url] = (object)array(
 			'url' => $url,
 			'options' => $options,
-			'attributes' => $attributes,
+			'attributes' => $attributes
 		);
 
 		return $this;
@@ -106,7 +106,7 @@ class AssetBlueprint {
 		$this->js[$url] = (object)array(
 			'url' => $url,
 			'options' => $options,
-			'attributes' => $attributes,
+			'attributes' => $attributes
 		);
 
 		return $this;
