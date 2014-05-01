@@ -87,4 +87,12 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame(['one', 'two', 'three'], $array);
 	}
 
+	public function testPathCompile()
+	{
+		$this->assertEquals('foo/bar/baz', path_compile('foo', '/bar/', 'baz/'));
+		$this->assertEquals('/foo/bar/baz', path_compile(['/foo', 'bar/', 'baz/']));
+
+		$this->assertEquals('', path_compile(''));
+		$this->assertEquals('', path_compile([]));
+	}
 }

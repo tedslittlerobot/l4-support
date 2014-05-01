@@ -32,6 +32,9 @@ class FileDriverTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals('path:public/foo', $this->manager->path());
 
 		$this->assertEquals('path:public/foo/bar/baz', $this->manager->path('bar/baz'));
+
+		$this->assertEquals('path:public/foo/bar/baz/woop', $this->manager->path(['bar/baz', 'woop']));
+		$this->assertEquals('path:public/foo/bar/baz/boom', $this->manager->path('bar/baz', 'boom'));
 	}
 
 	public function testGenerateCustomBasePath()

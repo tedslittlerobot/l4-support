@@ -74,3 +74,24 @@ if ( ! function_exists('array_splice_item'))
 		return array_splice($haystack, $key, 1)[0];
 	}
 }
+
+if ( ! function_exists('path_compile'))
+{
+	/**
+	 * Put a bunch of path components together
+	 *
+	 * @param  string|array  $paths
+	 * @return string
+	 */
+	function path_compile( $paths = '' )
+	{
+		$paths = is_array($paths) ? $paths : func_get_args();
+
+		foreach ($paths as $xi => &$component)
+		{
+			$component = ($xi == 0) ? rtrim($component, '/') : trim($component, '/');
+		}
+
+		return implode('/', $paths);
+	}
+}

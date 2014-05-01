@@ -52,6 +52,8 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	 */
 	public function path( $path = '' )
 	{
+		$path = trim(path_compile( is_array($path) ? $path : func_get_args() ), '/');
+
 		return $this->basePath . '/' . $this->directory . ($path ? '/' . $path : '');
 	}
 
