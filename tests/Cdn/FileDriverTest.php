@@ -74,4 +74,12 @@ class FileDriverTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertRegExp('/[a-z0-9]*\.foo/', $this->manager->filename($file));
 	}
+
+	public function testVersionname()
+	{
+		$this->constructor();
+
+		$this->assertEquals('foo.bar.baz', $this->manager->versionname('foo.baz', 'bar'));
+		$this->assertEquals('foo.bar', $this->manager->versionname('foo', 'bar'));
+	}
 }

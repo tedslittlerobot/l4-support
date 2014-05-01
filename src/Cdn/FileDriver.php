@@ -87,6 +87,28 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	{
 		return md5(microtime()) . '.' . $file->guessExtension();
 	}
+	public function versionname( $name, $namespace = null )
+	{
+		if (is_null($namespace)) return $name;
+
+		$components = explode('.', $name);
+		$extension = null;
+
+		if (count($components) > 1)
+		{
+			$extension = array_pop($components);
+		}
+
+		$components[] = $namespace;
+
+		if ( ! is_null($extension) )
+		{
+			$components[] = $extension;
+		}
+
+		return implode('.', $components);
+	}
+
 	 * @inheritdoc
 	 */
 	public function save( $file, $namespace = '', $overwrite = false )
