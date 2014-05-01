@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Str;
 use Illuminate\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File;
+use Symfony\Component\HttpFoundation\File\File;
+use SplFileInfo;
 
 class FileDriver /*implements CdnDriverInterface*/ {
 
@@ -51,7 +52,27 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	 */
 	public function path( $path = '' )
 	{
-		return realpath( $this->basePath . '/' . $this->directory . '/' . $path );
+		return $this->basePath . '/' . $this->directory . ($path ? '/' . $path : '');
+	}
+
+	/**
+	 * Make a File object out of the given input
+	 * @param  mixed  $file
+	 * @return File
+	 */
+	public function parseFile($file)
+	{
+		// don't do anything if it's already a File
+		if ( $file instanceof File ) return $file;
+
+		if ( $file instanceof SplFileInfo )
+		{
+			// if it's a SplFileInto, make it a File
+			$file = new File( $file->getRealPath() );
+		}
+
+		// Otherwise assume (for now) it's a string
+		return new File( $file );
 	}
 
 	/**

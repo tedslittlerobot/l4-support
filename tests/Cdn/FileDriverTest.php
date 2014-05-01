@@ -40,4 +40,27 @@ class FileDriverTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals('woop/tmp/bar/baz', $this->manager->path('bar/baz'));
 	}
+
+	public function testParseFileString()
+	{
+		$this->constructor();
+
+		$this->assertInstanceOf('Symfony\Component\HttpFoundation\File\File', $this->manager->parseFile( __FILE__ ));
+	}
+
+	public function testParseFileInstance()
+	{
+		$this->constructor();
+
+		$file = m::mock('Symfony\Component\HttpFoundation\File\File');
+		$this->assertSame($file, $this->manager->parseFile( $file ));
+	}
+
+	public function testParseFileInfo()
+	{
+		$this->constructor();
+
+		// test string assignment
+		$this->assertInstanceOf('Symfony\Component\HttpFoundation\File\File', $this->manager->parseFile( new \SplFileInfo( __FILE__ ) ));
+	}
 }
