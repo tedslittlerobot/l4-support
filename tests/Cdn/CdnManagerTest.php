@@ -48,6 +48,7 @@ class CdnManagerTest extends \PHPUnit_Framework_TestCase {
 		$files = m::mock('Illuminate\Filesystem\Filesystem');
 
 		$this->app->shouldReceive('make')->with('files')->once()->andReturn($files);
+		$this->app->shouldReceive('make')->with('path.public')->once()->andReturn('foobar');
 
 		$fileDriver = $this->manager->createFileDriver( $config );
 
@@ -60,6 +61,7 @@ class CdnManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$files = m::mock('Illuminate\Filesystem\Filesystem');
 		$this->app->shouldReceive('make')->with('files')->once()->andReturn($files);
+		$this->app->shouldReceive('make')->with('path.public')->once()->andReturn('foobar');
 
 		$this->manager->addLocation('foo', $config);
 
@@ -75,13 +77,14 @@ class CdnManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$callable = function( $app, $config )
 		{
-			return new Tlr\Cdn\FileDriver( $app->make('files'), $config );
+			return new Tlr\Cdn\FileDriver( $app, $app->make('files'), $config );
 		};
 
 		$this->manager->extend( 'woop', $callable );
 
 		$files = m::mock('Illuminate\Filesystem\Filesystem');
 		$this->app->shouldReceive('make')->with('files')->once()->andReturn($files);
+		$this->app->shouldReceive('make')->with('path.public')->once()->andReturn('foobar');
 
 		$this->manager->addLocation('foo', $config);
 
@@ -97,6 +100,7 @@ class CdnManagerTest extends \PHPUnit_Framework_TestCase {
 
 		$files = m::mock('Illuminate\Filesystem\Filesystem');
 		$this->app->shouldReceive('make')->with('files')->times(2)->andReturn($files);
+		$this->app->shouldReceive('make')->with('path.public')->times(2)->andReturn('foobar');
 
 		$this->manager->addLocation('foo', $config);
 		$this->manager->addLocation('bar', $config);

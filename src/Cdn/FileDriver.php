@@ -18,19 +18,12 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	 */
 	protected $directory;
 
-	/**
-	 * The manipulations to apply to the files
-	 * @var array
-	 */
-	protected $manipulations = array();
-
-	public function __construct( Filesystem $files, $config = array() )
+	public function __construct( $app, Filesystem $files, $config = array() )
 	{
 		$this->files = $files;
 
 		$this->basePath = $this->generateBasePath( array_get( $config, 'base' ), $app );
-		$this->directory = array_get( $config, 'path' );
-		$this->manipulations = array_get( $config, 'manipulations', array() );
+		$this->directory = array_get( $config, 'path', 'tmp' );
 	}
 
 	/**

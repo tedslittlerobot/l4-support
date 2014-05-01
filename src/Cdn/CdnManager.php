@@ -169,7 +169,7 @@ class CdnManager {
 
 	public function createFileDriver( $config )
 	{
-		return new FileDriver( $this->app->make('files'), $config );
+		return new FileDriver( $this->app, $this->app->make('files'), $config );
 	}
 
 }
