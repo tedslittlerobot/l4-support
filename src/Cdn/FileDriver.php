@@ -5,6 +5,11 @@ use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use SplFileInfo;
 
+/**
+ * path => 'path/to/dir' # tmp
+ * base => '/base/path' # public (can be public or storage to use laravel's path generators)
+ *
+ */
 class FileDriver /*implements CdnDriverInterface*/ {
 
 	/**
@@ -89,6 +94,7 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	{
 		return md5(microtime()) . '.' . $file->guessExtension();
 	}
+
 	public function versionname( $name, $namespace = null )
 	{
 		if (is_null($namespace)) return $name;
@@ -111,20 +117,22 @@ class FileDriver /*implements CdnDriverInterface*/ {
 		return implode('.', $components);
 	}
 
-	 * @inheritdoc
-	 */
-	public function save( $file, $namespace = '', $overwrite = false )
+	public function subdirectory( $name )
 	{
-		/**
-		 * - Get file - handle SplFileInfo, and string
-		 * - Generate filename
-		 * - Upload (ie. call writeFile)
-		 * - Repeat for Manipulations
-		 * - Return filename
-		 */
+		return '';
+	}
 
-		// @TODO: get filename
-		$filename = '';
+	/**
+	 * @inheritdoc
+	 * @todo Manipulations
+	 */
+	public function save( $file )
+	{
+		$file = $this->parseFile( $file );
+
+		$filename = $this->filename( $file );
+
+		$this->writeFile( $file, $filename );
 
 		return $filename;
 	}
@@ -132,14 +140,23 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	/**
 	 * @inheritdoc
 	 */
-	public function writeFile( File $file, $name )
+	public function writeFile( File $file, $name, $namespace = null )
 	{
 		/**
 		 * - Eval Upload directory
 		 * - Write file
 		 */
 
-		return $this;
+		$path = $this->subdirectory( $name );
+
+		$name = $this->versionname( $name, $namespace );
+
+		if ( ! $this->files->isDirectory( $this->path($path) ) )
+		{
+			$this->files->makeDirectory( $this->path($path), 0777, true );
+		}
+
+		return $this->files->move($file->getRealPath(), $this->path( $path, $name ) );
 	}
 
 	/**
@@ -164,7 +181,6 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	 */
 	public function url( $filename, $version = null )
 	{
-		return URL::to( $this->path( $this->filename( $filename, $namespace ) ) );
+		return URL::to( $this->filename( $filename, $namespace ) );
 	}
-
 }
