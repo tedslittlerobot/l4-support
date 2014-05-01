@@ -76,6 +76,17 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	}
 
 	/**
+	 * Generate a filename
+	 *
+	 * @todo add other file name generators
+	 *
+	 * @param  File   $file
+	 * @return string
+	 */
+	public function filename( File $file )
+	{
+		return md5(microtime()) . '.' . $file->guessExtension();
+	}
 	 * @inheritdoc
 	 */
 	public function save( $file, $namespace = '', $overwrite = false )

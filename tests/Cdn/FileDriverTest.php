@@ -63,4 +63,15 @@ class FileDriverTest extends \PHPUnit_Framework_TestCase {
 		// test string assignment
 		$this->assertInstanceOf('Symfony\Component\HttpFoundation\File\File', $this->manager->parseFile( new \SplFileInfo( __FILE__ ) ));
 	}
+
+	public function testFilename()
+	{
+		$this->constructor();
+
+		$file = m::mock('Symfony\Component\HttpFoundation\File\File');
+
+		$file->shouldReceive('guessExtension')->andReturn('foo');
+
+		$this->assertRegExp('/[a-z0-9]*\.foo/', $this->manager->filename($file));
+	}
 }
