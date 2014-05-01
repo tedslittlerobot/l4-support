@@ -15,8 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Tlr\\Support\\": "src/Support/",
-            "Tlr\\Cdn\\": "src/Cdn/"
+            "Tlr\\": "src/"
         },
         "files": ["src/Support/functions.php"]
     },
@@ -24,6 +23,7 @@
     "require-dev": {
         "mockery/mockery": "dev-master",
         "patchwork/utf8": "1.1.*",
+        "illuminate/console": "4.1.*",
         "symfony/http-foundation": "2.*"
     }
 }

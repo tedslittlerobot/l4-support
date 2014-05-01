@@ -20,7 +20,10 @@
       <whitelist>
         <directory suffix=".php">./src/</directory>
         <exclude>
-          <file>./src/SupportServiceProvider.php</file>
+          <file>./src/Support/EventRoutingServiceProvider.php</file>
+          <file>./src/Support/SupportServiceProvider.php</file>
+          <file>./src/Asset/AssetFacade.php</file>
+          <file>./src/Asset/AssetServiceProvider.php</file>
         </exclude>
       </whitelist>
     </filter>

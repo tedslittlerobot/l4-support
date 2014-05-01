@@ -1,6 +1,12 @@
 HTML Macros
 ===========
 
+> To generate an
+
+> HTML element
+
+> Programatically
+
 ## Programatic element generation
 
 > HTML::element( $element = 'div', $attributes = [], $content = null )
