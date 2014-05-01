@@ -34,19 +34,11 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	 */
 	protected function generateBasePath($path, $app)
 	{
-		if (is_null($path))
-		{
-			return $app->make('path.public');
-		}
+		if ( is_null($path) ) { $path = 'public'; }
 
-		if ($path == 'storage')
+		if ( in_array($path, array('public', 'storage')) )
 		{
-			return $app->make('path.storage');
-		}
-
-		if ($path == 'public')
-		{
-			return $app->make('path.public');
+			return $app->make( 'path.' . $path );
 		}
 
 		return $path;
