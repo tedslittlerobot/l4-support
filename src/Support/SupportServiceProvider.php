@@ -12,6 +12,7 @@ class SupportServiceProvider extends ServiceProvider {
 	{
 		$this->htmlMacros();
 		$this->validations();
+		$this->bladeTags();
 	}
 
 	/**
@@ -74,12 +75,14 @@ class SupportServiceProvider extends ServiceProvider {
 	 */
 	public function bladeTags()
 	{
+		$blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
+
 		/**
 		 * @firsterror('key')
 		 *   {{ $message }}
 		 * @endfirsterror
 		 */
-		$this->app['blade.compiler']->extend(function($view, $compiler)
+		$blade->extend(function($view, $compiler)
 		{
 			$pattern = $compiler->createMatcher('firsterror');
 			$closingPattern = $compiler->createPlainMatcher('endfirsterror');
@@ -96,7 +99,7 @@ class SupportServiceProvider extends ServiceProvider {
 		 *   <li> {{$message}} </li>
 		 * @enderrors
 		 */
-		$this->app['blade.compiler']->extend(function($view, $compiler)
+		$blade->extend(function($view, $compiler)
 		{
 			$pattern = $compiler->createMatcher('errors');
 			$closingPattern = $compiler->createPlainMatcher('enderrors');
