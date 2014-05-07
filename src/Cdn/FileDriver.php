@@ -181,6 +181,6 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	 */
 	public function url( $filename, $version = null )
 	{
-		return URL::to( $this->filename( $filename, $namespace ) );
+		return \URL::to( path_compile( $this->directory, $this->versionname( $filename, $version ) ) );
 	}
 }
