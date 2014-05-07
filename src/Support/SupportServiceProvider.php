@@ -70,6 +70,47 @@ class SupportServiceProvider extends ServiceProvider {
 	}
 
 	/**
+	 * Register some general blade template tags
+	 */
+	public function bladeTags()
+	{
+		/**
+		 * @firsterror('key')
+		 *   {{ $message }}
+		 * @endfirsterror
+		 */
+		$this->app['blade.compiler']->extend(function($view, $compiler)
+		{
+			$pattern = $compiler->createMatcher('firsterror');
+			$closingPattern = $compiler->createPlainMatcher('endfirsterror');
+
+			$view = preg_replace($pattern, '$1<?php if($errors->has($2)): ; $message = $errors->first($2); ?>', $view);
+
+			$view = preg_replace($closingPattern, '$1<?php endif; ?>', $view);
+
+			return $view;
+		});
+
+		/**
+		 * @errors('key')
+		 *   <li> {{$message}} </li>
+		 * @enderrors
+		 */
+		$this->app['blade.compiler']->extend(function($view, $compiler)
+		{
+			$pattern = $compiler->createMatcher('errors');
+			$closingPattern = $compiler->createPlainMatcher('enderrors');
+
+			$view = preg_replace($pattern, '$1<?php foreach($errors->get($2) as $message): ?>', $view);
+
+			$view = preg_replace($closingPattern, '$1<?php endforeach; ?>', $view);
+
+			return $view;
+		});
+
+	}
+
+	/**
 	 * Register the service provider.
 	 *
 	 * @return void
