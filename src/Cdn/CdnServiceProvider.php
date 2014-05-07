@@ -16,7 +16,14 @@ class CdnServiceProvider extends ServiceProvider {
 	{
 		$this->app->bindShared('cdn', function()
 		{
-			return new CdnManager($this->app);
+			$cdn = new CdnManager($this->app);
+
+			foreach ($this->app['config']->get('cdn.locations') as $key => $location)
+			{
+				$cdn->addLocation($key, $location);
+			}
+
+			return $cdn;
 		});
 	}
 
