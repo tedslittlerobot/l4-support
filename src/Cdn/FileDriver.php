@@ -1,5 +1,6 @@
 <?php namespace Tlr\Cdn;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
@@ -165,7 +166,7 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	public function delete( $filename )
 	{
 		// @TODO: delete manipulations
-		return $this->files->delete( $this->path( $this->filename( $filename, $namespace ) ) );
+		return $this->files->delete( $this->path( $this->versionname( $filename ) ) );
 	}
 
 	/**
@@ -173,7 +174,7 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	 */
 	public function get( $filename, $version = null )
 	{
-		return $this->files->get( $this->path( $this->filename( $filename, $namespace ) ) );
+		return $this->files->get( $this->path( $this->versionname( $filename, $version ) ) );
 	}
 
 	/**
@@ -181,6 +182,6 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	 */
 	public function url( $filename, $version = null )
 	{
-		return \URL::to( path_compile( $this->directory, $this->versionname( $filename, $version ) ) );
+		return URL::to( path_compile( $this->directory, $this->versionname( $filename, $version ) ) );
 	}
 }

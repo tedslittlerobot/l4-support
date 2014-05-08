@@ -17,7 +17,7 @@ class FileDriverTest extends \PHPUnit_Framework_TestCase {
 			$this->app->shouldReceive('make')->with('path.' . array_get($config, 'base', 'public'))->once()->andReturn('path:' . array_get($config, 'base', 'public'));
 		}
 
-		$this->manager = new Tlr\Cdn\FileDriver($this->app, $this->files, $config);
+		$this->driver = new Tlr\Cdn\FileDriver($this->app, $this->files, $config);
 	}
 
 	public function tearDown()
@@ -29,26 +29,26 @@ class FileDriverTest extends \PHPUnit_Framework_TestCase {
 	{
 		$this->constructor([ 'path' => 'foo' ]);
 
-		$this->assertEquals('path:public/foo', $this->manager->path());
+		$this->assertEquals('path:public/foo', $this->driver->path());
 
-		$this->assertEquals('path:public/foo/bar/baz', $this->manager->path('bar/baz'));
+		$this->assertEquals('path:public/foo/bar/baz', $this->driver->path('bar/baz'));
 
-		$this->assertEquals('path:public/foo/bar/baz/woop', $this->manager->path(['bar/baz', 'woop']));
-		$this->assertEquals('path:public/foo/bar/baz/boom', $this->manager->path('bar/baz', 'boom'));
+		$this->assertEquals('path:public/foo/bar/baz/woop', $this->driver->path(['bar/baz', 'woop']));
+		$this->assertEquals('path:public/foo/bar/baz/boom', $this->driver->path('bar/baz', 'boom'));
 	}
 
 	public function testGenerateCustomBasePath()
 	{
 		$this->constructor([ 'base' => 'woop' ]);
 
-		$this->assertEquals('woop/tmp/bar/baz', $this->manager->path('bar/baz'));
+		$this->assertEquals('woop/tmp/bar/baz', $this->driver->path('bar/baz'));
 	}
 
 	public function testParseFileString()
 	{
 		$this->constructor();
 
-		$this->assertInstanceOf('Symfony\Component\HttpFoundation\File\File', $this->manager->parseFile( __FILE__ ));
+		$this->assertInstanceOf('Symfony\Component\HttpFoundation\File\File', $this->driver->parseFile( __FILE__ ));
 	}
 
 	public function testParseFileInstance()
@@ -56,7 +56,7 @@ class FileDriverTest extends \PHPUnit_Framework_TestCase {
 		$this->constructor();
 
 		$file = m::mock('Symfony\Component\HttpFoundation\File\File');
-		$this->assertSame($file, $this->manager->parseFile( $file ));
+		$this->assertSame($file, $this->driver->parseFile( $file ));
 	}
 
 	public function testParseFileInfo()
@@ -64,7 +64,7 @@ class FileDriverTest extends \PHPUnit_Framework_TestCase {
 		$this->constructor();
 
 		// test string assignment
-		$this->assertInstanceOf('Symfony\Component\HttpFoundation\File\File', $this->manager->parseFile( new \SplFileInfo( __FILE__ ) ));
+		$this->assertInstanceOf('Symfony\Component\HttpFoundation\File\File', $this->driver->parseFile( new \SplFileInfo( __FILE__ ) ));
 	}
 
 	public function testFilename()
@@ -75,14 +75,39 @@ class FileDriverTest extends \PHPUnit_Framework_TestCase {
 
 		$file->shouldReceive('guessExtension')->andReturn('foo');
 
-		$this->assertRegExp('/[a-z0-9]*\.foo/', $this->manager->filename($file));
+		$this->assertRegExp('/[a-z0-9]*\.foo/', $this->driver->filename($file));
 	}
 
 	public function testVersionname()
 	{
 		$this->constructor();
 
-		$this->assertEquals('foo.bar.baz', $this->manager->versionname('foo.baz', 'bar'));
-		$this->assertEquals('foo.bar', $this->manager->versionname('foo', 'bar'));
+		$this->assertEquals('foo.bar.baz', $this->driver->versionname('foo.baz', 'bar'));
+		$this->assertEquals('foo.bar', $this->driver->versionname('foo', 'bar'));
+	}
+
+	public function testUrlGenerator()
+	{
+		$this->constructor(['path' => 'foo']);
+
+		\Illuminate\Support\Facades\URL::shouldReceive('to')->once()->with('foo/bar')->andReturn('baz');
+
+		$this->assertEquals('baz', $this->driver->url('bar'));
+	}
+	public function testGet()
+	{
+		$this->constructor(['path' => 'foo']);
+
+		$this->files->shouldReceive('get')->once()->with('path:public/foo/bar')->andReturn('baz');
+
+		$this->assertEquals('baz', $this->driver->get('bar'));
+	}
+	public function testDelete()
+	{
+		$this->constructor(['path' => 'foo']);
+
+		$this->files->shouldReceive('delete')->once()->with('path:public/foo/bar')->andReturn('baz');
+
+		$this->assertEquals('baz', $this->driver->delete('bar'));
 	}
 }

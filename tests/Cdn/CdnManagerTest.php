@@ -114,4 +114,33 @@ class CdnManagerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( $fileDriverFoo, $this->manager->location('foo') );
 	}
 
+	public function testCreateInvalidLocation()
+	{
+		$this->setExpectedException('InvalidArgumentException');
+
+		$this->manager->addLocation('foo', array('driver' => 'bar'));
+
+		$this->manager->location('foo');
+	}
+
+	public function testDynamicDefaultLocationCall()
+	{
+		$driver = m::mock();
+		$this->manager->addLocation('foo', array('driver' => 'bar'));
+		$this->manager->extend('bar', function() use ($driver)
+		{
+			return $driver;
+		});
+
+		$this->manager->setDefaultLocation('foo');
+
+		$result = $this->manager->location();
+
+		$this->assertSame($driver, $result);
+
+		$driver->shouldReceive('baz')->once()->andReturn('woop');
+
+		$this->assertEquals( 'woop', $this->manager->baz() );
+	}
+
 }
