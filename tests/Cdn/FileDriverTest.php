@@ -86,22 +86,6 @@ class FileDriverTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals('foo.bar', $this->driver->versionname('foo', 'bar'));
 	}
 
-	public function testUrlGenerator()
-	{
-		$this->constructor(['path' => 'foo']);
-
-		\Illuminate\Support\Facades\URL::shouldReceive('to')->once()->with('foo/bar')->andReturn('baz');
-
-		$this->assertEquals('baz', $this->driver->url('bar'));
-	}
-	public function testGet()
-	{
-		$this->constructor(['path' => 'foo']);
-
-		$this->files->shouldReceive('get')->once()->with('path:public/foo/bar')->andReturn('baz');
-
-		$this->assertEquals('baz', $this->driver->get('bar'));
-	}
 	public function testDelete()
 	{
 		$this->constructor(['path' => 'foo']);
@@ -110,4 +94,25 @@ class FileDriverTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals('baz', $this->driver->delete('bar'));
 	}
+
+	public function testGet()
+	{
+		$this->constructor(['path' => 'foo']);
+
+		$this->files->shouldReceive('get')->once()->with('path:public/foo/bar')->andReturn('baz');
+
+		$this->assertEquals('baz', $this->driver->get('bar'));
+	}
+
+
+	public function testUrlGenerator()
+	{
+		$this->constructor(['path' => 'foo']);
+
+		\Illuminate\Support\Facades\URL::shouldReceive('to')->once()->with('foo/bar')->andReturn('baz');
+
+		$this->assertEquals('baz', $this->driver->url('bar'));
+	}
+
+
 }
