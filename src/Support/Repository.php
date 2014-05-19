@@ -149,9 +149,12 @@ class Repository {
 	 * Perform some validation
 	 * @return boolean
 	 */
-	public function validate()
+	public function validate( $input = null, $rules = null )
 	{
-		$this->val = Validator::make( $this->getInput(), $this->getRules() );
+		$this->val = Validator::make(
+			is_array($input) ? $input : $this->getInput(),
+			is_array($rules) ? $rules : $this->getRules()
+		);
 
 		$this->data = $this->val->getData();
 
