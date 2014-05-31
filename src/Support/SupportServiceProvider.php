@@ -120,6 +120,48 @@ class SupportServiceProvider extends ServiceProvider {
 		});
 
 		/**
+		 * @notice
+		 *   {{ $message }}
+		 * @endnotice
+		 *
+		 * @notices
+		 *   <li> {{$message}} </li>
+		 * @endnotices
+		 */
+		$blade->extend(function($view, $compiler)
+		{
+			// @notice
+			$view = preg_replace(
+				$compiler->createPlainMatcher('firstnotice'),
+				'$1<?php if(count((array)Session::get("notices", array())) > 0): ; list($message) = (array)Session::get("notices", array()); ?>',
+				$view
+			);
+
+			// @endnotice
+			$view = preg_replace(
+				$compiler->createPlainMatcher('endfirstnotice'),
+				'$1<?php endif; ?>',
+				$view
+			);
+
+			// @notices
+			$view = preg_replace(
+				$compiler->createPlainMatcher('notices'),
+				'$1<?php foreach((array)Session::get("notices", array()) as $message): ?>',
+				$view
+			);
+
+			// @endnotices
+			$view = preg_replace(
+				$compiler->createPlainMatcher('endnotices'),
+				'$1<?php endforeach; ?>',
+				$view
+			);
+
+			return $view;
+		});
+
+		/**
 		 * @switch($value)
 		 * 	@case(1)
 		 * 	@default
