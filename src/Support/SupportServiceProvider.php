@@ -111,6 +111,30 @@ class SupportServiceProvider extends ServiceProvider {
 			return $view;
 		});
 
+		/**
+		 * @switch($value)
+		 * 	@case(1)
+		 * 	@default
+		 * 	@break
+		 * @endswitch
+		 */
+		$blade->extend(function($view, $compiler)
+		{
+			foreach (['switch', 'case'] as $tag)
+			{
+				$pattern = $compiler->createMatcher( $tag );
+				$view = preg_replace($pattern, '$1<?php ' . $tag . '($2): ?>', $view);
+			}
+
+			foreach (['break', 'default', 'endswitch'] as $tag)
+			{
+				$pattern = $compiler->createPlainMatcher( $tag );
+				$view = preg_replace($pattern, '$1<?php ' . $tag . '; ?>', $view);
+			}
+
+			return $view;
+		});
+
 	}
 
 	/**
