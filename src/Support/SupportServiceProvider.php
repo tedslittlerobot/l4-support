@@ -166,7 +166,7 @@ class SupportServiceProvider extends ServiceProvider {
 			// @title('Default Title')
 			$view = preg_replace(
 				$compiler->createMatcher('title'),
-				'$1<?php isset($title) ? $title : $2 ?>',
+				'$1<?php echo e(isset($title) ? $title : $2) ?>',
 				$view
 			);
 
