@@ -160,6 +160,37 @@ class SupportServiceProvider extends ServiceProvider {
 
 			return $view;
 		});
+
+		/**
+		 * @switch($value)
+		 * 	@case(1)
+		 * 	@default
+		 * 	@break
+		 * @endswitch
+		 */
+		$blade->extend(function($view, $compiler)
+		{
+			foreach (['switch', 'case'] as $tag)
+			{
+				$view = preg_replace(
+					$compiler->createMatcher( $tag ),
+					'$1<?php ' . $tag . '($2): ?>',
+					$view
+				);
+			}
+
+			foreach (['break', 'default', 'endswitch'] as $tag)
+			{
+				$view = preg_replace(
+					$compiler->createPlainMatcher( $tag ),
+					'$1<?php ' . $tag . '; ?>',
+					$view
+				);
+			}
+
+			return $view;
+		});
+
 	}
 
 	/**
