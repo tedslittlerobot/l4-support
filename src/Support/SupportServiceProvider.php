@@ -160,6 +160,18 @@ class SupportServiceProvider extends ServiceProvider {
 
 			return $view;
 		});
+
+		$blade->extend(function($view, $compiler)
+		{
+			// @title('Default Title')
+			$view = preg_replace(
+				$compiler->createMatcher('title'),
+				'$1<?php isset($title) ? $title : $2 ?>',
+				$view
+			);
+
+			return $view;
+		});
 	}
 
 	/**
