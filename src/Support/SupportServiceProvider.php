@@ -81,32 +81,40 @@ class SupportServiceProvider extends ServiceProvider {
 		 * @firsterror('key')
 		 *   {{ $message }}
 		 * @endfirsterror
-		 */
-		$blade->extend(function($view, $compiler)
-		{
-			$pattern = $compiler->createMatcher('firsterror');
-			$closingPattern = $compiler->createPlainMatcher('endfirsterror');
-
-			$view = preg_replace($pattern, '$1<?php if($errors->has($2)): ; $message = $errors->first($2); ?>', $view);
-
-			$view = preg_replace($closingPattern, '$1<?php endif; ?>', $view);
-
-			return $view;
-		});
-
-		/**
+		 *
 		 * @errors('key')
 		 *   <li> {{$message}} </li>
 		 * @enderrors
 		 */
 		$blade->extend(function($view, $compiler)
 		{
-			$pattern = $compiler->createMatcher('errors');
-			$closingPattern = $compiler->createPlainMatcher('enderrors');
+			// @firsterror('key')
+			$view = preg_replace(
+				$compiler->createMatcher('firsterror'),
+				'$1<?php if($errors->has($2)): ; $message = $errors->first($2); ?>',
+				$view
+			);
 
-			$view = preg_replace($pattern, '$1<?php foreach($errors->get($2) as $message): ?>', $view);
+			// @endfirsterror
+			$view = preg_replace(
+				$compiler->createPlainMatcher('endfirsterror'),
+				'$1<?php endif; ?>',
+				$view
+			);
 
-			$view = preg_replace($closingPattern, '$1<?php endforeach; ?>', $view);
+			// @errors('key')
+			$view = preg_replace(
+				$compiler->createMatcher('errors'),
+				'$1<?php foreach($errors->get($2) as $message): ?>',
+				$view
+			);
+
+			// @enderrors
+			$view = preg_replace(
+				$compiler->createPlainMatcher('enderrors'),
+				'$1<?php endforeach; ?>',
+				$view
+			);
 
 			return $view;
 		});
@@ -122,14 +130,20 @@ class SupportServiceProvider extends ServiceProvider {
 		{
 			foreach (['switch', 'case'] as $tag)
 			{
-				$pattern = $compiler->createMatcher( $tag );
-				$view = preg_replace($pattern, '$1<?php ' . $tag . '($2): ?>', $view);
+				$view = preg_replace(
+					$compiler->createMatcher( $tag ),
+					'$1<?php ' . $tag . '($2): ?>',
+					$view
+				);
 			}
 
 			foreach (['break', 'default', 'endswitch'] as $tag)
 			{
-				$pattern = $compiler->createPlainMatcher( $tag );
-				$view = preg_replace($pattern, '$1<?php ' . $tag . '; ?>', $view);
+				$view = preg_replace(
+					$compiler->createPlainMatcher( $tag ),
+					'$1<?php ' . $tag . '; ?>',
+					$view
+				);
 			}
 
 			return $view;
