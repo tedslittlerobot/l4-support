@@ -43,7 +43,7 @@ class FileDriver /*implements CdnDriverInterface*/ {
 	{
 		if ( is_null($path) ) { $path = 'public'; }
 
-		if ( in_array($path, array('public', 'storage')) )
+		if ( in_array($path, array('app', 'base', 'public', 'storage')) )
 		{
 			return $app->make( 'path.' . $path );
 		}
