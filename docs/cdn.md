@@ -57,6 +57,13 @@ To get the url to the file, pass the file name to the `url` method:
 <a href="{{ Cdn::location('profile-pictures')->url($filename) }}"></a>
 ```
 
+And to delete the file:
+
+```php
+$success = CDN::location('profile-pictures')
+	->delete( $filename );
+```
+
 ## Configuring
 
 ### File Driver
