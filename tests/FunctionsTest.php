@@ -135,4 +135,35 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals('', path_compile(''));
 		$this->assertEquals('', path_compile([]));
 	}
+
+	public function testClassDirname()
+	{
+		$class = 'Foo\Bar\Baz\Woop';
+
+		$this->assertEquals( 'Foo\Bar\Baz', class_dirname($class) );
+	}
+
+	public function testClassDirnameLevels()
+	{
+		$class = 'Foo\Bar\Baz\Woop';
+
+		$this->assertEquals( 'Foo', class_dirname($class, 3) );
+
+		$this->assertEquals( '.', class_dirname($class, 7) );
+	}
+
+	public function testClassDirnameBasename()
+	{
+		$class = 'Foo\Bar\Baz\Woop';
+
+		$this->assertEquals( 'Bar', class_dirname($class, 2, true) );
+	}
+
+	public function testClassDirnameObjectCall()
+	{
+		$class = 'Tlr\Support\SupportServiceProvider';
+		$instance = new $class([]);
+		$this->assertEquals( class_dirname( $instance ), class_dirname( $class ) );
+	}
+
 }

@@ -105,3 +105,30 @@ if ( ! function_exists('path_compile'))
 		return implode('/', $paths);
 	}
 }
+
+if ( ! function_exists('class_dirname'))
+{
+	/**
+	 * Get the class "dirname" of the given object / class.
+	 *
+	 * @param  string|object  $class     The object or class to dirname
+	 * @param  integer        $levels    How many levels to dirname (default: 1)
+	 * @param  boolean        $basename  Whether or not to basename the dirname (default: false)
+	 * @return string
+	 */
+	function class_dirname($class, $levels = 1, $basename = false)
+	{
+		$class = is_object($class) ? get_class($class) : $class;
+
+		$classpath = str_replace('\\', '/', $class);
+
+		for ( $xi = 0; $xi < $levels; $xi++ )
+		{
+			$classpath = dirname($classpath);
+		}
+
+		$classpath = str_replace('/', '\\', $classpath);
+
+		return $basename ? class_basename( $classpath ) : $classpath;
+	}
+}

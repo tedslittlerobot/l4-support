@@ -51,3 +51,21 @@ $item = array_splice_item($array, 'two');
 echo $item; // echoes 'two'
 echo json_encode($array); // echoes ["one", "three"]
 ```
+
+## class_dirname
+
+> class_dirname($class, $levels = 1, $basename = false);
+
+A complimentary function to laravel's own `class_basename`, this takes an object, or fully namespaced class string, and runs php's dirname function on it.
+
+An optional second argument allows you to go up multiple levels
+
+The third argument allows you to automatically call `class_basename` on the result
+
+```php
+use App\Content\Type\Widget\Controller;
+
+class_dirname( Controller::class ); // App\Content\Type\Widget
+class_dirname( Controller::class, 3 ); // App\Content
+class_dirname( Controller::class, 1, true ); // Widget
+```
